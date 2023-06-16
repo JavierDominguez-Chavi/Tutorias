@@ -1,0 +1,104 @@
+﻿<Page x:Class="Presentacion.ListaProblematicasAcademicas"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:Dominio="clr-namespace:Dominio;assembly=Dominio"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="White"
+      Loaded="CargarInformacionPagina"
+      Title="ListaProblematicasAcademicas">
+
+    <Page.Resources>
+        <CollectionViewSource x:Key="ViewSource_Problematicas" d:DesignSource="{d:DesignInstance {x:Type Dominio:Problematicas}}"/>
+    </Page.Resources>
+
+    <Grid DataContext="{StaticResource ViewSource_Problematicas}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_TituloDePagina" Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       Text="LISTADO DE PROBLEMÁTICAS" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" 
+                       FontSize="20"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_Filtrar" Grid.Column="1" Text="Filtrar: " TextWrapping="Wrap" HorizontalAlignment="Left" 
+                       VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
+            <xctk:WatermarkTextBox x:Name="TextBox_Filtrar" Watermark="Ingrese la Fecha, Título o Experiencia Educativa de la Problemática"
+                       Grid.Column="2" VerticalAlignment="Center" Padding="5" FontSize="16" CharacterCasing="Upper" 
+                       TextChanged="FiltrarContenidoTablaProblematicas"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="1" x:Name="DataGrid_Problematicas" ColumnWidth="*"  HeadersVisibility="Column" IsReadOnly="True"
+                      AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_FechaTutoria"
+                        Header="FECHA TUTORÍA" 
+                        IsReadOnly="True"
+                        Binding="{Binding TutoriasAcademicas.FechasTutorias.FechaTutoria, StringFormat=dd-MM-yyyy}"/>
+                    
+                    <DataGridTextColumn 
+                        x:Name="DataGridTextColumn_TituloProblematica"
+                        Header="TÍTULO DE PROBLEMÁTICA" 
+                        IsReadOnly="True"
+                        Binding="{Binding Titulo}"/>
+                    <DataGridTextColumn 
+                        x:Name="DataGridTextColumn_NombreExperienciaEducativa"
+                        Header="EXPERIENCIA EDUCATIVA"
+                        IsReadOnly="True"
+                        Binding="{Binding ExperienciasEducativas_Academicos.ExperienciasEducativas.Nombre}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.015*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="Button_Consultar" Grid.Column="3" Content="Consultar" Grid.Row="1" VerticalAlignment="Center" 
+                    FontSize="16" FontWeight="Bold" Height="34" Click="ConsultarProblematica"/>
+            <Button x:Name="Button_Regresar" Grid.Column="5" Content="Regresar" Grid.Row="1" VerticalAlignment="Center" 
+                    FontSize="16" FontWeight="Bold" Height="34" Click="RegresarPaginaAnterior"/>
+        </Grid>
+    </Grid>
+</Page>
+

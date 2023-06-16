@@ -1,0 +1,87 @@
+﻿<Page x:Class="Presentacion.ConsultarReportePorTutorAcademico"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReportePorTutorAcademico">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition x:Name="Row_Comentario"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition x:Name="Column1"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Reporte por Tutor Académico" HorizontalAlignment="Center" 
+               VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" FontFamily="Segoe UI" 
+               FontSize="16" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Periodo Escolar: " FontWeight="Bold"/>
+                <Label Content="No. Sesion:" FontWeight="Bold"/>
+                <Label Content="Fecha de Tutoría:" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Content="" x:Name="Label_PeriodoEscolar"/>
+                <Label Content="" Name="Label_NumeroDeSesion"/>
+                <Label Content="" x:Name="Label_FechaDeTutoria"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Programa Educativo: " FontWeight="Bold"/>
+                <Label Content="Tutor Académico: " FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label Content="" x:Name="Label_ProgramaEducativo"/>
+                <Label Content="" Name="Label_NombreTutorAcademico"/>
+            </StackPanel>
+        </StackPanel>
+        <Label Content="Listado de Estudiantes" Grid.Row="2" Grid.Column="0" 
+               HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <Label Content="Comentario General" Grid.Row="2" Grid.Column="1" 
+               HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+        <DataGrid Grid.Row="3" Grid.Column="0" Margin="20, 0, 20, 0" x:Name="DataGrid_ListadoDeEstudiantes"
+                  ItemsSource="{Binding}" 
+                  CanUserResizeColumns="False" CanUserResizeRows="True" CanUserAddRows="False"
+                  CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="False" AutoGenerateColumns="False" IsReadOnly="True"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Estudiante" Width="*" CanUserResize="True"
+                                    IsReadOnly="True" CanUserSort="True" Binding="{Binding Nombre}"/>
+                <DataGridCheckBoxColumn Header="Asistió" Width="*" Binding="{Binding Asistio}"/>
+                <DataGridCheckBoxColumn Header="En Riesgo" Width="*" Binding="{Binding EnRiesgo}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap"
+                   Text="Sin comentarios" VerticalAlignment="Center" x:Name="TextBlock_ComentarioGeneral" 
+                   Foreground="Black" TextAlignment="Justify" Background="#FFF5F6F8" MinWidth="350" MinHeight="100"/>
+        <Label Content="Problemáticas Académicas" Grid.Row="4" Grid.ColumnSpan="2" VerticalContentAlignment="Center"
+               HorizontalAlignment="Center" FontWeight="Bold"/>
+        <DataGrid Grid.Row="5" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False"
+                   CanUserDeleteRows="False" CanUserResizeRows="False"
+                   CanUserSortColumns="True" IsReadOnly="True"  Margin="20, 0, 20, 0" Name="DataGrid_ProblematicasAcademicas" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Experiencia Educativa" Width="*" Binding="{Binding ExperienciaEducativa}"/>
+                <DataGridTextColumn Header="Académico" Width="*" Binding="{Binding Academico}"/>
+                <DataGridTextColumn Header="Título" Width="*" Binding="{Binding Titulo}"/>
+                <DataGridTextColumn Header="Descripción" Width="*" Binding="{Binding Descripcion}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="1" Content="Regresar" HorizontalAlignment="Right" Margin="0, 0, 45, 0"
+                Grid.Row="6" VerticalAlignment="Center" 
+                Height="33" Width="85" FontSize="14" 
+                Background="MediumAquamarine" BorderBrush="MediumAquamarine" Click="Button_Click"/>
+
+    </Grid>
+</Page>

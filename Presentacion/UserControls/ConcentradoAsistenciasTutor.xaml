@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="Presentacion.ConcentradoAsistenciasTutor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Presentacion"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <DataGrid
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                FontSize="15"
+                ItemsSource="{Binding Tutores.CurrentItem.Estudiantes}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        x:Name="Header_Matricula"
+                        Header="Matricula"
+                        IsReadOnly="True"
+                        Binding="{Binding Matricula}"/>
+                    <DataGridTextColumn 
+                        Header="Nombre"
+                        x:Name="Header_Nombre"
+                        Width="*"
+                        IsReadOnly="True"
+                        Binding="{Binding NombreCompleto}"/>
+                    <DataGridTemplateColumn 
+                        x:Name="Header_1raSesion"
+                        Header="1ra Sesion"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox 
+                                    IsChecked="{Binding Horario1.Asistencia}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsEnabled="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn 
+                        x:Name="Header_2daSesion"
+                        Header="2da Sesion"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox 
+                                    IsChecked="{Binding Horario2.Asistencia}"
+                                    HorizontalAlignment="Center"
+                                    IsEnabled="False"
+                                    VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn 
+                        x:Name="Header_3raSesion"
+                        Header="3ra Sesion"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox 
+                                    IsChecked="{Binding Horario3.Asistencia}"
+                                    HorizontalAlignment="Center"
+                                    IsEnabled="False"
+                                    VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn 
+                        x:Name="Header_Riesgo"
+                        Header="En riesgo"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox 
+                                    IsChecked="{Binding EnRiesgo}"
+                                    IsEnabled="False"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel 
+            HorizontalAlignment="Left" 
+            Orientation="Horizontal"
+            Grid.Row="1">
+            <Grid Width="{Binding ElementName=Header_Matricula,Path=ActualWidth}">
+                <TextBlock 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="5,0,0,0" Text=""></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_Nombre,Path=ActualWidth}">
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    Margin="5,0,0,0" 
+                    Text="TOTAL" 
+                    FontWeight="Bold"
+                    HorizontalAlignment="Right"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_1raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_TotalAsistencias1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Text="{Binding Tutores.CurrentItem.Asistencias[0]}"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_2daSesion,Path=ActualWidth}" HorizontalAlignment="Center">
+                <TextBlock 
+                    x:Name="TextBlock_TotalAsistencias2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Text="{Binding Tutores.CurrentItem.Asistencias[1]}"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_3raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_TotalAsistencias3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Text="{Binding Tutores.CurrentItem.Asistencias[2]}"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_Riesgo,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_Riesgos"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Text="{Binding TotalRiesgos}"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

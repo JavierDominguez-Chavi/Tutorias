@@ -1,0 +1,242 @@
+﻿<Page x:Class="Presentacion.LlenarReporteDeTutoriaAcademica"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      d:DataContext="{d:DesignInstance Type=Dominio:TutoriasAcademicas}"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:Dominio="clr-namespace:Dominio;assembly=Dominio"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="White"
+      Loaded="CargarInformacionPagina"
+      Title="LlenarReporteDeTutoriaAcademica">
+
+    <Page.Resources>
+        <CollectionViewSource x:Key="ViewSource_Estudiantes" d:DesignSource="{d:DesignInstance {x:Type Dominio:Horarios}}"/>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_TituloDePagina" Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       Text="REPORTE DE TUTORÍA ACADÉMICA" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" 
+                       FontSize="18"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_PeriodoEscolar" Grid.Column="1"  TextWrapping="Wrap" Text="Periodo Escolar: " 
+                       VerticalAlignment="Center" TextAlignment="Right" FontWeight="Bold" 
+                       FontSize="16" Height="35"/>
+            <TextBlock x:Name="TextBlock_FechaPeriodoEscolar" Grid.Column="2"  TextWrapping="Wrap" 
+                       Text="{Binding FechasTutorias.PeriodosEscolares.IntervaloInicioFin, FallbackValue = 'DD/MM/AAAA'}" 
+                       VerticalAlignment="Center" FontWeight="Bold" 
+                       FontSize="16" Height="35"/>
+            <TextBlock x:Name="TextBlock_PeriodoTutoría" Grid.Column="4"  TextWrapping="Wrap" Text="Periodo Tutoría: " 
+                       VerticalAlignment="Center" TextAlignment="Right" FontWeight="Bold" 
+                       FontSize="16" Height="35"/>
+            <TextBlock x:Name="TextBlock_FechaPeriodoTutoría" Grid.Column="5"  TextWrapping="Wrap"
+                       Text="{Binding FechasTutorias.IntervaloInicioFin, FallbackValue = 'DD/MM/AAAA'}" 
+                       VerticalAlignment="Center" TextAlignment="Left" FontWeight="Bold" 
+                       FontSize="16" Height="35"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_ProgramaEducativo" Text="Nombre Programa Educativo" 
+                       Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" 
+                       FontSize="16"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_NumeroTutoria" Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       Text="{Binding FechasTutorias.TipoDeSesion, FallbackValue = 'Tipo de Tutoría'}" 
+                       VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="16"/>
+        </Grid>
+
+        <Grid Grid.Row="4"  DataContext="{StaticResource ViewSource_Estudiantes}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="1" x:Name="DataGrid_Estudiantes" ColumnWidth="*"  HeadersVisibility="Column" IsReadOnly="True"
+                      AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_NombreEstudiante"
+                        Header="ESTUDIANTE"
+                        IsReadOnly="True"
+                        Binding="{Binding Estudiantes.NombreCompleto}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="ASISTIÓ">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="CheckBox_Asistencia" HorizontalAlignment="Center"
+                                          IsChecked="{Binding Asistencia, UpdateSourceTrigger=PropertyChanged}"
+                                          Unchecked="DisminuirTotalYPorcentajeDeEstudiantesAsistentes" 
+                                          Checked="AumentarTotalYPorcentajeDeEstudiantesAsistentes"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="EN RIESGO">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="CheckBox_EnRiesgo" HorizontalAlignment="Center" 
+                                          IsChecked="{Binding Riesgo, UpdateSourceTrigger=PropertyChanged}"
+                                          Unchecked="DisminuirTotalYPorcentajeDeEstudiantesEnRiesgo" 
+                                          Checked="AumentarTotalYPorcentajeDeEstudiantesEnRiesgo"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="Label_Asistentes" Grid.Column="1"
+                   Background="Gray" VerticalAlignment="Center" FontSize="14" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" Text="Asistentes:" HorizontalAlignment="Right"/>
+            </Label>
+
+            <xctk:WatermarkTextBox x:Name="TextBox_TotalAsistentes" Padding="2" Grid.Column="2" HorizontalContentAlignment="Center"
+                                   VerticalAlignment="Center" FontSize="14" CharacterCasing="Normal" VerticalContentAlignment="Center"
+                                   Height="30" Text = "0 (00.00%)" IsReadOnly="True"/>
+
+            <Label x:Name="Label_EnRiesgo" Grid.Column="4"
+                   Background="Gray" VerticalAlignment="Center" FontSize="14" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" Text="En riesgo:" HorizontalAlignment="Right"/>
+            </Label>
+
+            <xctk:WatermarkTextBox x:Name="TextBox_TotalEnRiesgo" Padding="2" Grid.Column="5" HorizontalContentAlignment="Center"
+                                   VerticalAlignment="Center" FontSize="14" CharacterCasing="Normal" VerticalContentAlignment="Center"
+                                   Height="30" Text = "0 (00.00%)" IsReadOnly="True"/>
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Button_ProblematicaAcademica" Grid.Column="1" Content="Problemática académica"
+                    VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Height="34" 
+                     IsEnabled="False" Click="IngresarProblematicaAcademica"/>
+        </Grid>
+
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="32*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="Label_ComentarioGeneral" Grid.Column="1"
+                   Background="Gray" VerticalAlignment="Bottom" FontSize="14" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" Text="Comentario general:" HorizontalAlignment="Left"/>
+            </Label>
+        </Grid>
+
+        <Grid Grid.Row="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <xctk:WatermarkTextBox x:Name="TextBlock_ComentarioGeneral" Grid.Column="1" BorderBrush="Gray"
+                                   Watermark="Ingrese aquí el comentario general de la tutoría académica..."
+                                   TextWrapping="Wrap" TextAlignment="Left" Background="White" Text="{Binding ComentarioGeneral}"
+                                   FontSize="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
+
+        <Grid Grid.Row="9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.036*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="Button_Enviar" Grid.Column="3" Content="Enviar" Grid.Row="1" VerticalAlignment="Center" 
+                    FontSize="16" FontWeight="Bold" Height="34" Click="MostrarMensajeDeConfirmacion"/>
+            <Button x:Name="Button_Regresar" Grid.Column="5" Content="Cancelar" Grid.Row="1" VerticalAlignment="Center" 
+                    FontSize="16" FontWeight="Bold" Height="34" Click="CerrarVentanaLlenarReporteDeTutoriaAcademica"/>
+        </Grid>
+
+    </Grid>
+</Page>

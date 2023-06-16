@@ -1,0 +1,1331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModeloTutorias.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Academicos">
+          <Key>
+            <PropertyRef Name="IdAcademico" />
+          </Key>
+          <Property Name="IdAcademico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CorreoPersonal" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CorreoInstitucional" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tutorias.dbo.AcademicosRoles' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="AcademicosRoles">
+          <Key>
+            <PropertyRef Name="idAcademico" />
+            <PropertyRef Name="idRol" />
+            <PropertyRef Name="idProgramaEducativo" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idAcademico" Type="int" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+          <Property Name="idProgramaEducativo" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AcademicosUsuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contrasena" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estudiantes">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SemestreQueCursa" Type="int" Nullable="false" />
+          <Property Name="EnRiesgo" Type="bit" Nullable="false" />
+          <Property Name="CorreoPersonal" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CorreoInstitucional" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IdProgramaEducativo" Type="int" Nullable="false" />
+          <Property Name="IdAcademico" Type="int" />
+        </EntityType>
+        <EntityType Name="ExperienciasEducativas">
+          <Key>
+            <PropertyRef Name="IdExperienciaEducativa" />
+          </Key>
+          <Property Name="IdExperienciaEducativa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExperienciasEducativas_Academicos">
+          <Key>
+            <PropertyRef Name="NRC" />
+          </Key>
+          <Property Name="NRC" Type="int" Nullable="false" />
+          <Property Name="IdProgramaEducativo" Type="int" Nullable="false" />
+          <Property Name="IdExperienciaEducativa" Type="int" Nullable="false" />
+          <Property Name="IdAcademico" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Tutorias.dbo.ExperienciasEducativas_Estudiantes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="ExperienciasEducativas_Estudiantes">
+          <Key>
+            <PropertyRef Name="NRC" />
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="NRC" Type="int" Nullable="false" />
+          <Property Name="Matricula" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExperienciasEducativas_PeriodosEscolares">
+          <Key>
+            <PropertyRef Name="NRC" />
+          </Key>
+          <Property Name="NRC" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FechasTutorias">
+          <Key>
+            <PropertyRef Name="IdFechaTutoria" />
+          </Key>
+          <Property Name="IdFechaTutoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaTutoria" Type="date" Nullable="false" />
+          <Property Name="FechaCierreDeReporte" Type="date" Nullable="false" />
+          <Property Name="NumeroSesion" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="IdProgramaEducativo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="IdHorarios" />
+          </Key>
+          <Property Name="IdHorarios" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asistencia" Type="bit" Nullable="false" />
+          <Property Name="Riesgo" Type="bit" Nullable="false" />
+          <Property Name="HoraTutoria" Type="time" Precision="7" Nullable="false" />
+          <Property Name="IdTutoriaAcademica" Type="int" Nullable="false" />
+          <Property Name="Matricula" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PeriodosEscolares">
+          <Key>
+            <PropertyRef Name="IdPeriodoEscolar" />
+          </Key>
+          <Property Name="IdPeriodoEscolar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Problematicas">
+          <Key>
+            <PropertyRef Name="IdProblematica" />
+          </Key>
+          <Property Name="IdProblematica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="text" Nullable="false" />
+          <Property Name="Descripcion" Type="text" Nullable="false" />
+          <Property Name="IdTutoriaAcademica" Type="int" Nullable="false" />
+          <Property Name="NRC" Type="int" Nullable="false" />
+          <Property Name="Matricula" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProgramasEducativos">
+          <Key>
+            <PropertyRef Name="IdProgramaEducativo" />
+          </Key>
+          <Property Name="IdProgramaEducativo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreProgramaEducativo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreRol" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Soluciones">
+          <Key>
+            <PropertyRef Name="IdSolucion" />
+          </Key>
+          <Property Name="IdSolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Descripcion" Type="text" Nullable="false" />
+          <Property Name="IdProblematica" Type="int" Nullable="false" />
+          <Property Name="IdAcademico" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TutoriasAcademicas">
+          <Key>
+            <PropertyRef Name="IdTutoriaAcademica" />
+          </Key>
+          <Property Name="IdTutoriaAcademica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComentarioGeneral" Type="text" Nullable="false" />
+          <Property Name="ReporteEntregado" Type="bit" Nullable="false" />
+          <Property Name="IdAcademico" Type="int" Nullable="false" />
+          <Property Name="IdFechaTuria" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AcademicosRoles_Id_Academico">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="1" />
+          <End Role="AcademicosRoles" Type="Self.AcademicosRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="AcademicosRoles">
+              <PropertyRef Name="idAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicosRoles_Id_Programa_Educativo">
+          <End Role="ProgramasEducativos" Type="Self.ProgramasEducativos" Multiplicity="1" />
+          <End Role="AcademicosRoles" Type="Self.AcademicosRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramasEducativos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Principal>
+            <Dependent Role="AcademicosRoles">
+              <PropertyRef Name="idProgramaEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicosRoles_Id_Rol">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="AcademicosRoles" Type="Self.AcademicosRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="AcademicosRoles">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicosRoles_Id_Usuario">
+          <End Role="AcademicosUsuarios" Type="Self.AcademicosUsuarios" Multiplicity="1" />
+          <End Role="AcademicosRoles" Type="Self.AcademicosRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicosUsuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AcademicosRoles">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estudiantes_id_Programa_Educativo">
+          <End Role="ProgramasEducativos" Type="Self.ProgramasEducativos" Multiplicity="1" />
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramasEducativos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Principal>
+            <Dependent Role="Estudiantes">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estudiantes_idAcademico">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="0..1" />
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="Estudiantes">
+              <PropertyRef Name="IdAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEduacativas_Academicos_Id_Academico">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="0..1" />
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa">
+          <End Role="ExperienciasEducativas" Type="Self.ExperienciasEducativas" Multiplicity="1" />
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExperienciasEducativas">
+              <PropertyRef Name="IdExperienciaEducativa" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="IdExperienciaEducativa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo">
+          <End Role="ProgramasEducativos" Type="Self.ProgramasEducativos" Multiplicity="1" />
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramasEducativos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEducativas_Estudiantes_matricula">
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="1" />
+          <End Role="ExperienciasEducativas_Estudiantes" Type="Self.ExperienciasEducativas_Estudiantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiantes">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_Estudiantes">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEducativas_Estudiantes_NRC">
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="1" />
+          <End Role="ExperienciasEducativas_Estudiantes" Type="Self.ExperienciasEducativas_Estudiantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="NRC" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_Estudiantes">
+              <PropertyRef Name="NRC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEducativas_PeriodosEscolares_Id_Periodo">
+          <End Role="PeriodosEscolares" Type="Self.PeriodosEscolares" Multiplicity="1" />
+          <End Role="ExperienciasEducativas_PeriodosEscolares" Type="Self.ExperienciasEducativas_PeriodosEscolares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PeriodosEscolares">
+              <PropertyRef Name="IdPeriodoEscolar" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_PeriodosEscolares">
+              <PropertyRef Name="IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEducativas_PeriodosEscolares_NRC">
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="1" />
+          <End Role="ExperienciasEducativas_PeriodosEscolares" Type="Self.ExperienciasEducativas_PeriodosEscolares" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="NRC" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_PeriodosEscolares">
+              <PropertyRef Name="NRC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FechasTutorias_&#x9;Id_Periodo">
+          <End Role="PeriodosEscolares" Type="Self.PeriodosEscolares" Multiplicity="1" />
+          <End Role="FechasTutorias" Type="Self.FechasTutorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PeriodosEscolares">
+              <PropertyRef Name="IdPeriodoEscolar" />
+            </Principal>
+            <Dependent Role="FechasTutorias">
+              <PropertyRef Name="IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FechasTutorias_ProgramasEducativos">
+          <End Role="ProgramasEducativos" Type="Self.ProgramasEducativos" Multiplicity="1" />
+          <End Role="FechasTutorias" Type="Self.FechasTutorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramasEducativos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Principal>
+            <Dependent Role="FechasTutorias">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horarios_Id_Tutoria_academica">
+          <End Role="TutoriasAcademicas" Type="Self.TutoriasAcademicas" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutoriasAcademicas">
+              <PropertyRef Name="IdTutoriaAcademica" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="IdTutoriaAcademica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horarios_matricula">
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiantes">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Problematicas_Id_Tutoria_Academica">
+          <End Role="TutoriasAcademicas" Type="Self.TutoriasAcademicas" Multiplicity="1" />
+          <End Role="Problematicas" Type="Self.Problematicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutoriasAcademicas">
+              <PropertyRef Name="IdTutoriaAcademica" />
+            </Principal>
+            <Dependent Role="Problematicas">
+              <PropertyRef Name="IdTutoriaAcademica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Problematicas_matricula">
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="1" />
+          <End Role="Problematicas" Type="Self.Problematicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiantes">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Problematicas">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Problematicas_NRC">
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="1" />
+          <End Role="Problematicas" Type="Self.Problematicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="NRC" />
+            </Principal>
+            <Dependent Role="Problematicas">
+              <PropertyRef Name="NRC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soluciones_Id_Academico">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="1" />
+          <End Role="Soluciones" Type="Self.Soluciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="Soluciones">
+              <PropertyRef Name="IdAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soluciones_IdProblematica">
+          <End Role="Problematicas" Type="Self.Problematicas" Multiplicity="1" />
+          <End Role="Soluciones" Type="Self.Soluciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Problematicas">
+              <PropertyRef Name="IdProblematica" />
+            </Principal>
+            <Dependent Role="Soluciones">
+              <PropertyRef Name="IdProblematica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutoriasAcademicas_Id_FechaTuria">
+          <End Role="FechasTutorias" Type="Self.FechasTutorias" Multiplicity="1" />
+          <End Role="TutoriasAcademicas" Type="Self.TutoriasAcademicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FechasTutorias">
+              <PropertyRef Name="IdFechaTutoria" />
+            </Principal>
+            <Dependent Role="TutoriasAcademicas">
+              <PropertyRef Name="IdFechaTuria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutoriasAcademicas_Academicos">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="1" />
+          <End Role="TutoriasAcademicas" Type="Self.TutoriasAcademicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="TutoriasAcademicas">
+              <PropertyRef Name="IdAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModeloTutoriasStoreContainer">
+          <EntitySet Name="Academicos" EntityType="Self.Academicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicosUsuarios" EntityType="Self.AcademicosUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estudiantes" EntityType="Self.Estudiantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExperienciasEducativas" EntityType="Self.ExperienciasEducativas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExperienciasEducativas_Academicos" EntityType="Self.ExperienciasEducativas_Academicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExperienciasEducativas_PeriodosEscolares" EntityType="Self.ExperienciasEducativas_PeriodosEscolares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FechasTutorias" EntityType="Self.FechasTutorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horarios" EntityType="Self.Horarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PeriodosEscolares" EntityType="Self.PeriodosEscolares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Problematicas" EntityType="Self.Problematicas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramasEducativos" EntityType="Self.ProgramasEducativos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Soluciones" EntityType="Self.Soluciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TutoriasAcademicas" EntityType="Self.TutoriasAcademicas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicosRoles" EntityType="Self.AcademicosRoles" Schema="dbo" store:Type="Tables">
+          </EntitySet>
+          <EntitySet Name="ExperienciasEducativas_Estudiantes" EntityType="Self.ExperienciasEducativas_Estudiantes" Schema="dbo" store:Type="Tables">
+          </EntitySet>
+          <AssociationSet Name="FK_AcademicosRoles_Id_Academico" Association="Self.FK_AcademicosRoles_Id_Academico">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="AcademicosRoles" EntitySet="AcademicosRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicosRoles_Id_Programa_Educativo" Association="Self.FK_AcademicosRoles_Id_Programa_Educativo">
+            <End Role="ProgramasEducativos" EntitySet="ProgramasEducativos" />
+            <End Role="AcademicosRoles" EntitySet="AcademicosRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicosRoles_Id_Rol" Association="Self.FK_AcademicosRoles_Id_Rol">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AcademicosRoles" EntitySet="AcademicosRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicosRoles_Id_Usuario" Association="Self.FK_AcademicosRoles_Id_Usuario">
+            <End Role="AcademicosUsuarios" EntitySet="AcademicosUsuarios" />
+            <End Role="AcademicosRoles" EntitySet="AcademicosRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estudiantes_id_Programa_Educativo" Association="Self.FK_Estudiantes_id_Programa_Educativo">
+            <End Role="ProgramasEducativos" EntitySet="ProgramasEducativos" />
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estudiantes_idAcademico" Association="Self.FK_Estudiantes_idAcademico">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEduacativas_Academicos_Id_Academico" Association="Self.FK_ExperienciasEduacativas_Academicos_Id_Academico">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa" Association="Self.FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa">
+            <End Role="ExperienciasEducativas" EntitySet="ExperienciasEducativas" />
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo" Association="Self.FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo">
+            <End Role="ProgramasEducativos" EntitySet="ProgramasEducativos" />
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEducativas_Estudiantes_matricula" Association="Self.FK_ExperienciasEducativas_Estudiantes_matricula">
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+            <End Role="ExperienciasEducativas_Estudiantes" EntitySet="ExperienciasEducativas_Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEducativas_Estudiantes_NRC" Association="Self.FK_ExperienciasEducativas_Estudiantes_NRC">
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+            <End Role="ExperienciasEducativas_Estudiantes" EntitySet="ExperienciasEducativas_Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEducativas_PeriodosEscolares_Id_Periodo" Association="Self.FK_ExperienciasEducativas_PeriodosEscolares_Id_Periodo">
+            <End Role="PeriodosEscolares" EntitySet="PeriodosEscolares" />
+            <End Role="ExperienciasEducativas_PeriodosEscolares" EntitySet="ExperienciasEducativas_PeriodosEscolares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEducativas_PeriodosEscolares_NRC" Association="Self.FK_ExperienciasEducativas_PeriodosEscolares_NRC">
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+            <End Role="ExperienciasEducativas_PeriodosEscolares" EntitySet="ExperienciasEducativas_PeriodosEscolares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FechasTutorias_&#x9;Id_Periodo" Association="Self.FK_FechasTutorias_&#x9;Id_Periodo">
+            <End Role="PeriodosEscolares" EntitySet="PeriodosEscolares" />
+            <End Role="FechasTutorias" EntitySet="FechasTutorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FechasTutorias_ProgramasEducativos" Association="Self.FK_FechasTutorias_ProgramasEducativos">
+            <End Role="ProgramasEducativos" EntitySet="ProgramasEducativos" />
+            <End Role="FechasTutorias" EntitySet="FechasTutorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horarios_Id_Tutoria_academica" Association="Self.FK_Horarios_Id_Tutoria_academica">
+            <End Role="TutoriasAcademicas" EntitySet="TutoriasAcademicas" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horarios_matricula" Association="Self.FK_Horarios_matricula">
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Problematicas_Id_Tutoria_Academica" Association="Self.FK_Problematicas_Id_Tutoria_Academica">
+            <End Role="TutoriasAcademicas" EntitySet="TutoriasAcademicas" />
+            <End Role="Problematicas" EntitySet="Problematicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Problematicas_matricula" Association="Self.FK_Problematicas_matricula">
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+            <End Role="Problematicas" EntitySet="Problematicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Problematicas_NRC" Association="Self.FK_Problematicas_NRC">
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+            <End Role="Problematicas" EntitySet="Problematicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soluciones_Id_Academico" Association="Self.FK_Soluciones_Id_Academico">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="Soluciones" EntitySet="Soluciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soluciones_IdProblematica" Association="Self.FK_Soluciones_IdProblematica">
+            <End Role="Problematicas" EntitySet="Problematicas" />
+            <End Role="Soluciones" EntitySet="Soluciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutoriasAcademicas_Id_FechaTuria" Association="Self.FK_TutoriasAcademicas_Id_FechaTuria">
+            <End Role="FechasTutorias" EntitySet="FechasTutorias" />
+            <End Role="TutoriasAcademicas" EntitySet="TutoriasAcademicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutoriasAcademicas_Academicos" Association="Self.FK_TutoriasAcademicas_Academicos">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="TutoriasAcademicas" EntitySet="TutoriasAcademicas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModeloTutorias" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Academicos">
+          <Key>
+            <PropertyRef Name="IdAcademico" />
+          </Key>
+          <Property Name="IdAcademico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CorreoPersonal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CorreoInstitucional" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AcademicosRoles" Relationship="Self.FK_AcademicosRoles_Id_Academico" FromRole="Academicos" ToRole="AcademicosRoles" />
+          <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Estudiantes_idAcademico" FromRole="Academicos" ToRole="Estudiantes" />
+          <NavigationProperty Name="ExperienciasEducativas_Academicos" Relationship="Self.FK_ExperienciasEduacativas_Academicos_Id_Academico" FromRole="Academicos" ToRole="ExperienciasEducativas_Academicos" />
+          <NavigationProperty Name="Soluciones" Relationship="Self.FK_Soluciones_Id_Academico" FromRole="Academicos" ToRole="Soluciones" />
+          <NavigationProperty Name="TutoriasAcademicas" Relationship="Self.FK_TutoriasAcademicas_Academicos" FromRole="Academicos" ToRole="TutoriasAcademicas" />
+        </EntityType>
+        <EntityType Name="AcademicosUsuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AcademicosRoles" Relationship="Self.FK_AcademicosRoles_Id_Usuario" FromRole="AcademicosUsuarios" ToRole="AcademicosRoles" />
+        </EntityType>
+        <EntityType Name="Estudiantes">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SemestreQueCursa" Type="Int32" Nullable="false" />
+          <Property Name="EnRiesgo" Type="Boolean" Nullable="false" />
+          <Property Name="CorreoPersonal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CorreoInstitucional" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdProgramaEducativo" Type="Int32" Nullable="false" />
+          <Property Name="IdAcademico" Type="Int32" />
+          <NavigationProperty Name="Academicos" Relationship="Self.FK_Estudiantes_idAcademico" FromRole="Estudiantes" ToRole="Academicos" />
+          <NavigationProperty Name="ProgramasEducativos" Relationship="Self.FK_Estudiantes_id_Programa_Educativo" FromRole="Estudiantes" ToRole="ProgramasEducativos" />
+          <NavigationProperty Name="Horarios" Relationship="Self.FK_Horarios_matricula" FromRole="Estudiantes" ToRole="Horarios" />
+          <NavigationProperty Name="Problematicas" Relationship="Self.FK_Problematicas_matricula" FromRole="Estudiantes" ToRole="Problematicas" />
+          <NavigationProperty Name="ExperienciasEducativas_Academicos" Relationship="Self.ExperienciasEducativas_Estudiantes" FromRole="Estudiantes" ToRole="ExperienciasEducativas_Academicos" />
+        </EntityType>
+        <EntityType Name="ExperienciasEducativas">
+          <Key>
+            <PropertyRef Name="IdExperienciaEducativa" />
+          </Key>
+          <Property Name="IdExperienciaEducativa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ExperienciasEducativas_Academicos" Relationship="Self.FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa" FromRole="ExperienciasEducativas" ToRole="ExperienciasEducativas_Academicos" />
+        </EntityType>
+        <EntityType Name="ExperienciasEducativas_Academicos">
+          <Key>
+            <PropertyRef Name="NRC" />
+          </Key>
+          <Property Name="NRC" Type="Int32" Nullable="false" />
+          <Property Name="IdProgramaEducativo" Type="Int32" Nullable="false" />
+          <Property Name="IdExperienciaEducativa" Type="Int32" Nullable="false" />
+          <Property Name="IdAcademico" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Academicos" Relationship="Self.FK_ExperienciasEduacativas_Academicos_Id_Academico" FromRole="ExperienciasEducativas_Academicos" ToRole="Academicos" />
+          <NavigationProperty Name="ExperienciasEducativas" Relationship="Self.FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa" FromRole="ExperienciasEducativas_Academicos" ToRole="ExperienciasEducativas" />
+          <NavigationProperty Name="ProgramasEducativos" Relationship="Self.FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo" FromRole="ExperienciasEducativas_Academicos" ToRole="ProgramasEducativos" />
+          <NavigationProperty Name="Problematicas" Relationship="Self.FK_Problematicas_NRC" FromRole="ExperienciasEducativas_Academicos" ToRole="Problematicas" />
+          <NavigationProperty Name="PeriodosEscolares" Relationship="Self.ExperienciasEducativas_PeriodosEscolares" FromRole="ExperienciasEducativas_Academicos" ToRole="PeriodosEscolares" />
+          <NavigationProperty Name="Estudiantes" Relationship="Self.ExperienciasEducativas_Estudiantes" FromRole="ExperienciasEducativas_Academicos" ToRole="Estudiantes" />
+        </EntityType>
+        <EntityType Name="FechasTutorias">
+          <Key>
+            <PropertyRef Name="IdFechaTutoria" />
+          </Key>
+          <Property Name="IdFechaTutoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaTutoria" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaCierreDeReporte" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NumeroSesion" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdProgramaEducativo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PeriodosEscolares" Relationship="Self.FK_FechasTutorias__Id_Periodo" FromRole="FechasTutorias" ToRole="PeriodosEscolares" />
+          <NavigationProperty Name="ProgramasEducativos" Relationship="Self.FK_FechasTutorias_ProgramasEducativos" FromRole="FechasTutorias" ToRole="ProgramasEducativos" />
+          <NavigationProperty Name="TutoriasAcademicas" Relationship="Self.FK_TutoriasAcademicas_Id_FechaTuria" FromRole="FechasTutorias" ToRole="TutoriasAcademicas" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="IdHorarios" />
+          </Key>
+          <Property Name="IdHorarios" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asistencia" Type="Boolean" Nullable="false" />
+          <Property Name="Riesgo" Type="Boolean" Nullable="false" />
+          <Property Name="HoraTutoria" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IdTutoriaAcademica" Type="Int32" Nullable="false" />
+          <Property Name="Matricula" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Horarios_matricula" FromRole="Horarios" ToRole="Estudiantes" />
+          <NavigationProperty Name="TutoriasAcademicas" Relationship="Self.FK_Horarios_Id_Tutoria_academica" FromRole="Horarios" ToRole="TutoriasAcademicas" />
+        </EntityType>
+        <EntityType Name="PeriodosEscolares">
+          <Key>
+            <PropertyRef Name="IdPeriodoEscolar" />
+          </Key>
+          <Property Name="IdPeriodoEscolar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="FechasTutorias" Relationship="Self.FK_FechasTutorias__Id_Periodo" FromRole="PeriodosEscolares" ToRole="FechasTutorias" />
+          <NavigationProperty Name="ExperienciasEducativas_Academicos" Relationship="Self.ExperienciasEducativas_PeriodosEscolares" FromRole="PeriodosEscolares" ToRole="ExperienciasEducativas_Academicos" />
+        </EntityType>
+        <EntityType Name="Problematicas">
+          <Key>
+            <PropertyRef Name="IdProblematica" />
+          </Key>
+          <Property Name="IdProblematica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdTutoriaAcademica" Type="Int32" Nullable="false" />
+          <Property Name="NRC" Type="Int32" Nullable="false" />
+          <Property Name="Matricula" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Problematicas_matricula" FromRole="Problematicas" ToRole="Estudiantes" />
+          <NavigationProperty Name="ExperienciasEducativas_Academicos" Relationship="Self.FK_Problematicas_NRC" FromRole="Problematicas" ToRole="ExperienciasEducativas_Academicos" />
+          <NavigationProperty Name="TutoriasAcademicas" Relationship="Self.FK_Problematicas_Id_Tutoria_Academica" FromRole="Problematicas" ToRole="TutoriasAcademicas" />
+          <NavigationProperty Name="Soluciones" Relationship="Self.FK_Soluciones_IdProblematica" FromRole="Problematicas" ToRole="Soluciones" />
+        </EntityType>
+        <EntityType Name="ProgramasEducativos">
+          <Key>
+            <PropertyRef Name="IdProgramaEducativo" />
+          </Key>
+          <Property Name="IdProgramaEducativo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProgramaEducativo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Estudiantes_id_Programa_Educativo" FromRole="ProgramasEducativos" ToRole="Estudiantes" />
+          <NavigationProperty Name="ExperienciasEducativas_Academicos" Relationship="Self.FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo" FromRole="ProgramasEducativos" ToRole="ExperienciasEducativas_Academicos" />
+          <NavigationProperty Name="FechasTutorias" Relationship="Self.FK_FechasTutorias_ProgramasEducativos" FromRole="ProgramasEducativos" ToRole="FechasTutorias" />
+          <NavigationProperty Name="AcademicosRoles" Relationship="Self.FK_AcademicosRoles_Id_Programa_Educativo" FromRole="ProgramasEducativos" ToRole="AcademicosRoles" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreRol" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AcademicosRoles" Relationship="Self.FK_AcademicosRoles_Id_Rol" FromRole="Roles" ToRole="AcademicosRoles" />
+        </EntityType>
+        <EntityType Name="Soluciones">
+          <Key>
+            <PropertyRef Name="IdSolucion" />
+          </Key>
+          <Property Name="IdSolucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdProblematica" Type="Int32" Nullable="false" />
+          <Property Name="IdAcademico" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Academicos" Relationship="Self.FK_Soluciones_Id_Academico" FromRole="Soluciones" ToRole="Academicos" />
+          <NavigationProperty Name="Problematicas" Relationship="Self.FK_Soluciones_IdProblematica" FromRole="Soluciones" ToRole="Problematicas" />
+        </EntityType>
+        <EntityType Name="TutoriasAcademicas">
+          <Key>
+            <PropertyRef Name="IdTutoriaAcademica" />
+          </Key>
+          <Property Name="IdTutoriaAcademica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComentarioGeneral" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReporteEntregado" Type="Boolean" Nullable="false" />
+          <Property Name="IdAcademico" Type="Int32" Nullable="false" />
+          <Property Name="IdFechaTuria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Academicos" Relationship="Self.FK_TutoriasAcademicas_Academicos" FromRole="TutoriasAcademicas" ToRole="Academicos" />
+          <NavigationProperty Name="FechasTutorias" Relationship="Self.FK_TutoriasAcademicas_Id_FechaTuria" FromRole="TutoriasAcademicas" ToRole="FechasTutorias" />
+          <NavigationProperty Name="Horarios" Relationship="Self.FK_Horarios_Id_Tutoria_academica" FromRole="TutoriasAcademicas" ToRole="Horarios" />
+          <NavigationProperty Name="Problematicas" Relationship="Self.FK_Problematicas_Id_Tutoria_Academica" FromRole="TutoriasAcademicas" ToRole="Problematicas" />
+        </EntityType>
+        <EntityType Name="AcademicosRoles">
+          <Key>
+            <PropertyRef Name="idAcademico" />
+            <PropertyRef Name="idRol" />
+            <PropertyRef Name="idProgramaEducativo" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idAcademico" Type="Int32" Nullable="false" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <Property Name="idProgramaEducativo" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Academicos" Relationship="Self.FK_AcademicosRoles_Id_Academico" FromRole="AcademicosRoles" ToRole="Academicos" />
+          <NavigationProperty Name="AcademicosUsuarios" Relationship="Self.FK_AcademicosRoles_Id_Usuario" FromRole="AcademicosRoles" ToRole="AcademicosUsuarios" />
+          <NavigationProperty Name="ProgramasEducativos" Relationship="Self.FK_AcademicosRoles_Id_Programa_Educativo" FromRole="AcademicosRoles" ToRole="ProgramasEducativos" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_AcademicosRoles_Id_Rol" FromRole="AcademicosRoles" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_AcademicosRoles_Id_Academico">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="1" />
+          <End Role="AcademicosRoles" Type="Self.AcademicosRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="AcademicosRoles">
+              <PropertyRef Name="idAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estudiantes_idAcademico">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="0..1" />
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="Estudiantes">
+              <PropertyRef Name="IdAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEduacativas_Academicos_Id_Academico">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="0..1" />
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soluciones_Id_Academico">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="1" />
+          <End Role="Soluciones" Type="Self.Soluciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="Soluciones">
+              <PropertyRef Name="IdAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutoriasAcademicas_Academicos">
+          <End Role="Academicos" Type="Self.Academicos" Multiplicity="1" />
+          <End Role="TutoriasAcademicas" Type="Self.TutoriasAcademicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academicos">
+              <PropertyRef Name="IdAcademico" />
+            </Principal>
+            <Dependent Role="TutoriasAcademicas">
+              <PropertyRef Name="IdAcademico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicosRoles_Id_Usuario">
+          <End Role="AcademicosUsuarios" Type="Self.AcademicosUsuarios" Multiplicity="1" />
+          <End Role="AcademicosRoles" Type="Self.AcademicosRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicosUsuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AcademicosRoles">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estudiantes_id_Programa_Educativo">
+          <End Role="ProgramasEducativos" Type="Self.ProgramasEducativos" Multiplicity="1" />
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramasEducativos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Principal>
+            <Dependent Role="Estudiantes">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horarios_matricula">
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiantes">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Problematicas_matricula">
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="1" />
+          <End Role="Problematicas" Type="Self.Problematicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiantes">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Problematicas">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa">
+          <End Role="ExperienciasEducativas" Type="Self.ExperienciasEducativas" Multiplicity="1" />
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExperienciasEducativas">
+              <PropertyRef Name="IdExperienciaEducativa" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="IdExperienciaEducativa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo">
+          <End Role="ProgramasEducativos" Type="Self.ProgramasEducativos" Multiplicity="1" />
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramasEducativos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Principal>
+            <Dependent Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Problematicas_NRC">
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="1" />
+          <End Role="Problematicas" Type="Self.Problematicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExperienciasEducativas_Academicos">
+              <PropertyRef Name="NRC" />
+            </Principal>
+            <Dependent Role="Problematicas">
+              <PropertyRef Name="NRC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FechasTutorias__Id_Periodo">
+          <End Role="PeriodosEscolares" Type="Self.PeriodosEscolares" Multiplicity="1" />
+          <End Role="FechasTutorias" Type="Self.FechasTutorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PeriodosEscolares">
+              <PropertyRef Name="IdPeriodoEscolar" />
+            </Principal>
+            <Dependent Role="FechasTutorias">
+              <PropertyRef Name="IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FechasTutorias_ProgramasEducativos">
+          <End Role="ProgramasEducativos" Type="Self.ProgramasEducativos" Multiplicity="1" />
+          <End Role="FechasTutorias" Type="Self.FechasTutorias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramasEducativos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Principal>
+            <Dependent Role="FechasTutorias">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutoriasAcademicas_Id_FechaTuria">
+          <End Role="FechasTutorias" Type="Self.FechasTutorias" Multiplicity="1" />
+          <End Role="TutoriasAcademicas" Type="Self.TutoriasAcademicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FechasTutorias">
+              <PropertyRef Name="IdFechaTutoria" />
+            </Principal>
+            <Dependent Role="TutoriasAcademicas">
+              <PropertyRef Name="IdFechaTuria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horarios_Id_Tutoria_academica">
+          <End Role="TutoriasAcademicas" Type="Self.TutoriasAcademicas" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutoriasAcademicas">
+              <PropertyRef Name="IdTutoriaAcademica" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="IdTutoriaAcademica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Problematicas_Id_Tutoria_Academica">
+          <End Role="TutoriasAcademicas" Type="Self.TutoriasAcademicas" Multiplicity="1" />
+          <End Role="Problematicas" Type="Self.Problematicas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutoriasAcademicas">
+              <PropertyRef Name="IdTutoriaAcademica" />
+            </Principal>
+            <Dependent Role="Problematicas">
+              <PropertyRef Name="IdTutoriaAcademica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soluciones_IdProblematica">
+          <End Role="Problematicas" Type="Self.Problematicas" Multiplicity="1" />
+          <End Role="Soluciones" Type="Self.Soluciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Problematicas">
+              <PropertyRef Name="IdProblematica" />
+            </Principal>
+            <Dependent Role="Soluciones">
+              <PropertyRef Name="IdProblematica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicosRoles_Id_Programa_Educativo">
+          <End Role="ProgramasEducativos" Type="Self.ProgramasEducativos" Multiplicity="1" />
+          <End Role="AcademicosRoles" Type="Self.AcademicosRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProgramasEducativos">
+              <PropertyRef Name="IdProgramaEducativo" />
+            </Principal>
+            <Dependent Role="AcademicosRoles">
+              <PropertyRef Name="idProgramaEducativo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicosRoles_Id_Rol">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="AcademicosRoles" Type="Self.AcademicosRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="AcademicosRoles">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExperienciasEducativas_PeriodosEscolares">
+          <End Role="PeriodosEscolares" Type="Self.PeriodosEscolares" Multiplicity="0..1" />
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="*" />
+        </Association>
+        <Association Name="ExperienciasEducativas_Estudiantes">
+          <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
+          <End Role="ExperienciasEducativas_Academicos" Type="Self.ExperienciasEducativas_Academicos" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EntidadesTutorias" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Academicos" EntityType="Self.Academicos" />
+          <EntitySet Name="AcademicosUsuarios" EntityType="Self.AcademicosUsuarios" />
+          <EntitySet Name="Estudiantes" EntityType="Self.Estudiantes" />
+          <EntitySet Name="ExperienciasEducativas" EntityType="Self.ExperienciasEducativas" />
+          <EntitySet Name="ExperienciasEducativas_Academicos" EntityType="Self.ExperienciasEducativas_Academicos" />
+          <EntitySet Name="FechasTutorias" EntityType="Self.FechasTutorias" />
+          <EntitySet Name="Horarios" EntityType="Self.Horarios" />
+          <EntitySet Name="PeriodosEscolares" EntityType="Self.PeriodosEscolares" />
+          <EntitySet Name="Problematicas" EntityType="Self.Problematicas" />
+          <EntitySet Name="ProgramasEducativos" EntityType="Self.ProgramasEducativos" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Soluciones" EntityType="Self.Soluciones" />
+          <EntitySet Name="TutoriasAcademicas" EntityType="Self.TutoriasAcademicas" />
+          <EntitySet Name="AcademicosRoles" EntityType="Self.AcademicosRoles" />
+          <AssociationSet Name="FK_AcademicosRoles_Id_Academico" Association="Self.FK_AcademicosRoles_Id_Academico">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="AcademicosRoles" EntitySet="AcademicosRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estudiantes_idAcademico" Association="Self.FK_Estudiantes_idAcademico">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEduacativas_Academicos_Id_Academico" Association="Self.FK_ExperienciasEduacativas_Academicos_Id_Academico">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soluciones_Id_Academico" Association="Self.FK_Soluciones_Id_Academico">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="Soluciones" EntitySet="Soluciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutoriasAcademicas_Academicos" Association="Self.FK_TutoriasAcademicas_Academicos">
+            <End Role="Academicos" EntitySet="Academicos" />
+            <End Role="TutoriasAcademicas" EntitySet="TutoriasAcademicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicosRoles_Id_Usuario" Association="Self.FK_AcademicosRoles_Id_Usuario">
+            <End Role="AcademicosUsuarios" EntitySet="AcademicosUsuarios" />
+            <End Role="AcademicosRoles" EntitySet="AcademicosRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estudiantes_id_Programa_Educativo" Association="Self.FK_Estudiantes_id_Programa_Educativo">
+            <End Role="ProgramasEducativos" EntitySet="ProgramasEducativos" />
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horarios_matricula" Association="Self.FK_Horarios_matricula">
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Problematicas_matricula" Association="Self.FK_Problematicas_matricula">
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+            <End Role="Problematicas" EntitySet="Problematicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa" Association="Self.FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa">
+            <End Role="ExperienciasEducativas" EntitySet="ExperienciasEducativas" />
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo" Association="Self.FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo">
+            <End Role="ProgramasEducativos" EntitySet="ProgramasEducativos" />
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Problematicas_NRC" Association="Self.FK_Problematicas_NRC">
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+            <End Role="Problematicas" EntitySet="Problematicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FechasTutorias__Id_Periodo" Association="Self.FK_FechasTutorias__Id_Periodo">
+            <End Role="PeriodosEscolares" EntitySet="PeriodosEscolares" />
+            <End Role="FechasTutorias" EntitySet="FechasTutorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FechasTutorias_ProgramasEducativos" Association="Self.FK_FechasTutorias_ProgramasEducativos">
+            <End Role="ProgramasEducativos" EntitySet="ProgramasEducativos" />
+            <End Role="FechasTutorias" EntitySet="FechasTutorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutoriasAcademicas_Id_FechaTuria" Association="Self.FK_TutoriasAcademicas_Id_FechaTuria">
+            <End Role="FechasTutorias" EntitySet="FechasTutorias" />
+            <End Role="TutoriasAcademicas" EntitySet="TutoriasAcademicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horarios_Id_Tutoria_academica" Association="Self.FK_Horarios_Id_Tutoria_academica">
+            <End Role="TutoriasAcademicas" EntitySet="TutoriasAcademicas" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Problematicas_Id_Tutoria_Academica" Association="Self.FK_Problematicas_Id_Tutoria_Academica">
+            <End Role="TutoriasAcademicas" EntitySet="TutoriasAcademicas" />
+            <End Role="Problematicas" EntitySet="Problematicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soluciones_IdProblematica" Association="Self.FK_Soluciones_IdProblematica">
+            <End Role="Problematicas" EntitySet="Problematicas" />
+            <End Role="Soluciones" EntitySet="Soluciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicosRoles_Id_Programa_Educativo" Association="Self.FK_AcademicosRoles_Id_Programa_Educativo">
+            <End Role="ProgramasEducativos" EntitySet="ProgramasEducativos" />
+            <End Role="AcademicosRoles" EntitySet="AcademicosRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicosRoles_Id_Rol" Association="Self.FK_AcademicosRoles_Id_Rol">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AcademicosRoles" EntitySet="AcademicosRoles" />
+          </AssociationSet>
+          <AssociationSet Name="ExperienciasEducativas_PeriodosEscolares" Association="Self.ExperienciasEducativas_PeriodosEscolares">
+            <End Role="PeriodosEscolares" EntitySet="PeriodosEscolares" />
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+          </AssociationSet>
+          <AssociationSet Name="ExperienciasEducativas_Estudiantes" Association="Self.ExperienciasEducativas_Estudiantes">
+            <End Role="Estudiantes" EntitySet="Estudiantes" />
+            <End Role="ExperienciasEducativas_Academicos" EntitySet="ExperienciasEducativas_Academicos" />
+          </AssociationSet>
+          <FunctionImport Name="GetEstudiantes" ReturnType="Collection(ModeloTutorias.GetEstudiantes_Result)">
+            <Parameter Name="busqueda" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetExperienciasEducativas" ReturnType="Collection(ModeloTutorias.GetExperienciasEducativas_Result)">
+            <Parameter Name="busqueda" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertExperiencias_Estudiantes">
+            <Parameter Name="nrc" Mode="In" Type="Int32" />
+            <Parameter Name="matricula" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetEstudiantes_Result">
+          <Property Type="String" Name="Matricula" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="SemestreQueCursa" Nullable="false" />
+          <Property Type="Boolean" Name="EnRiesgo" Nullable="false" />
+          <Property Type="String" Name="CorreoPersonal" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CorreoInstitucional" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="IdProgramaEducativo" Nullable="false" />
+          <Property Type="Int32" Name="IdAcademico" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetExperienciasEducativas_Result">
+          <Property Type="Int32" Name="NRC" Nullable="false" />
+          <Property Type="Int32" Name="IdProgramaEducativo" Nullable="false" />
+          <Property Type="Int32" Name="IdExperienciaEducativa" Nullable="false" />
+          <Property Type="Int32" Name="IdAcademico" Nullable="true" />
+          <Property Type="Int32" Name="IdExperienciaEducativa1" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModeloTutoriasStoreContainer" CdmEntityContainer="EntidadesTutorias">
+          <EntitySetMapping Name="Academicos">
+            <EntityTypeMapping TypeName="ModeloTutorias.Academicos">
+              <MappingFragment StoreEntitySet="Academicos">
+                <ScalarProperty Name="IdAcademico" ColumnName="IdAcademico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="CorreoPersonal" ColumnName="CorreoPersonal" />
+                <ScalarProperty Name="CorreoInstitucional" ColumnName="CorreoInstitucional" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcademicosUsuarios">
+            <EntityTypeMapping TypeName="ModeloTutorias.AcademicosUsuarios">
+              <MappingFragment StoreEntitySet="AcademicosUsuarios">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estudiantes">
+            <EntityTypeMapping TypeName="ModeloTutorias.Estudiantes">
+              <MappingFragment StoreEntitySet="Estudiantes">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="SemestreQueCursa" ColumnName="SemestreQueCursa" />
+                <ScalarProperty Name="EnRiesgo" ColumnName="EnRiesgo" />
+                <ScalarProperty Name="CorreoPersonal" ColumnName="CorreoPersonal" />
+                <ScalarProperty Name="CorreoInstitucional" ColumnName="CorreoInstitucional" />
+                <ScalarProperty Name="IdProgramaEducativo" ColumnName="IdProgramaEducativo" />
+                <ScalarProperty Name="IdAcademico" ColumnName="IdAcademico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExperienciasEducativas">
+            <EntityTypeMapping TypeName="ModeloTutorias.ExperienciasEducativas">
+              <MappingFragment StoreEntitySet="ExperienciasEducativas">
+                <ScalarProperty Name="IdExperienciaEducativa" ColumnName="IdExperienciaEducativa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExperienciasEducativas_Academicos">
+            <EntityTypeMapping TypeName="ModeloTutorias.ExperienciasEducativas_Academicos">
+              <MappingFragment StoreEntitySet="ExperienciasEducativas_Academicos">
+                <ScalarProperty Name="NRC" ColumnName="NRC" />
+                <ScalarProperty Name="IdProgramaEducativo" ColumnName="IdProgramaEducativo" />
+                <ScalarProperty Name="IdExperienciaEducativa" ColumnName="IdExperienciaEducativa" />
+                <ScalarProperty Name="IdAcademico" ColumnName="IdAcademico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FechasTutorias">
+            <EntityTypeMapping TypeName="ModeloTutorias.FechasTutorias">
+              <MappingFragment StoreEntitySet="FechasTutorias">
+                <ScalarProperty Name="IdFechaTutoria" ColumnName="IdFechaTutoria" />
+                <ScalarProperty Name="FechaTutoria" ColumnName="FechaTutoria" />
+                <ScalarProperty Name="FechaCierreDeReporte" ColumnName="FechaCierreDeReporte" />
+                <ScalarProperty Name="NumeroSesion" ColumnName="NumeroSesion" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdProgramaEducativo" ColumnName="IdProgramaEducativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horarios">
+            <EntityTypeMapping TypeName="ModeloTutorias.Horarios">
+              <MappingFragment StoreEntitySet="Horarios">
+                <ScalarProperty Name="IdHorarios" ColumnName="IdHorarios" />
+                <ScalarProperty Name="Asistencia" ColumnName="Asistencia" />
+                <ScalarProperty Name="Riesgo" ColumnName="Riesgo" />
+                <ScalarProperty Name="HoraTutoria" ColumnName="HoraTutoria" />
+                <ScalarProperty Name="IdTutoriaAcademica" ColumnName="IdTutoriaAcademica" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PeriodosEscolares">
+            <EntityTypeMapping TypeName="ModeloTutorias.PeriodosEscolares">
+              <MappingFragment StoreEntitySet="PeriodosEscolares">
+                <ScalarProperty Name="IdPeriodoEscolar" ColumnName="IdPeriodoEscolar" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Problematicas">
+            <EntityTypeMapping TypeName="ModeloTutorias.Problematicas">
+              <MappingFragment StoreEntitySet="Problematicas">
+                <ScalarProperty Name="IdProblematica" ColumnName="IdProblematica" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTutoriaAcademica" ColumnName="IdTutoriaAcademica" />
+                <ScalarProperty Name="NRC" ColumnName="NRC" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramasEducativos">
+            <EntityTypeMapping TypeName="ModeloTutorias.ProgramasEducativos">
+              <MappingFragment StoreEntitySet="ProgramasEducativos">
+                <ScalarProperty Name="IdProgramaEducativo" ColumnName="IdProgramaEducativo" />
+                <ScalarProperty Name="NombreProgramaEducativo" ColumnName="NombreProgramaEducativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ModeloTutorias.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Soluciones">
+            <EntityTypeMapping TypeName="ModeloTutorias.Soluciones">
+              <MappingFragment StoreEntitySet="Soluciones">
+                <ScalarProperty Name="IdSolucion" ColumnName="IdSolucion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdProblematica" ColumnName="IdProblematica" />
+                <ScalarProperty Name="IdAcademico" ColumnName="IdAcademico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutoriasAcademicas">
+            <EntityTypeMapping TypeName="ModeloTutorias.TutoriasAcademicas">
+              <MappingFragment StoreEntitySet="TutoriasAcademicas">
+                <ScalarProperty Name="IdTutoriaAcademica" ColumnName="IdTutoriaAcademica" />
+                <ScalarProperty Name="ComentarioGeneral" ColumnName="ComentarioGeneral" />
+                <ScalarProperty Name="ReporteEntregado" ColumnName="ReporteEntregado" />
+                <ScalarProperty Name="IdAcademico" ColumnName="IdAcademico" />
+                <ScalarProperty Name="IdFechaTuria" ColumnName="IdFechaTuria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcademicosRoles">
+            <EntityTypeMapping TypeName="ModeloTutorias.AcademicosRoles">
+              <MappingFragment StoreEntitySet="AcademicosRoles">
+                <ScalarProperty Name="idAcademico" ColumnName="idAcademico" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idProgramaEducativo" ColumnName="idProgramaEducativo" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ExperienciasEducativas_PeriodosEscolares" TypeName="ModeloTutorias.ExperienciasEducativas_PeriodosEscolares" StoreEntitySet="ExperienciasEducativas_PeriodosEscolares">
+            <EndProperty Name="PeriodosEscolares">
+              <ScalarProperty Name="IdPeriodoEscolar" ColumnName="IdPeriodo" />
+            </EndProperty>
+            <EndProperty Name="ExperienciasEducativas_Academicos">
+              <ScalarProperty Name="NRC" ColumnName="NRC" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ExperienciasEducativas_Estudiantes" TypeName="ModeloTutorias.ExperienciasEducativas_Estudiantes" StoreEntitySet="ExperienciasEducativas_Estudiantes">
+            <EndProperty Name="Estudiantes">
+              <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+            </EndProperty>
+            <EndProperty Name="ExperienciasEducativas_Academicos">
+              <ScalarProperty Name="NRC" ColumnName="NRC" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

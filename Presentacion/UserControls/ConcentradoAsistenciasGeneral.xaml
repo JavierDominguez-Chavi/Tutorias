@@ -1,0 +1,245 @@
+﻿<UserControl x:Class="Presentacion.ConcentradoAsistenciasGeneral"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Presentacion"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <DataGrid
+            Grid.Row="0"
+            ItemsSource="{Binding Tutores}"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            IsSynchronizedWithCurrentItem="True" SelectionChanged="DataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="Nombre"
+                    x:Name="Header_Nombre"
+                    Width="*"
+                    IsReadOnly="True"
+                    Binding="{Binding NombreCompleto}"/>
+                <DataGridTemplateColumn
+                    Header="1ra Sesion"
+                    x:Name="Header_1raSesion">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding Asistencias[0]}"
+                                HorizontalAlignment="Center">
+                                
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn 
+                    x:Name="Header_2daSesion"
+                    Header="2da Sesion"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="{Binding Asistencias[1]}"
+                                HorizontalAlignment="Center">
+
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn 
+                    x:Name="Header_3raSesion"
+                    Header="3ra Sesion"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                x:Name="Header_1raSesion"
+                                Text="{Binding Asistencias[2]}"
+                                HorizontalAlignment="Center">
+
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel 
+            HorizontalAlignment="Left" 
+            Orientation="Horizontal"
+            Grid.Row="1">
+            <Grid Width="{Binding ElementName=Header_Nombre,Path=ActualWidth}">
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    Margin="5,0,0,0" 
+                    Text="TOTAL" 
+                    FontWeight="Bold"
+                    HorizontalAlignment="Right"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_1raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_TotalAsistencias1"
+                    Text="{Binding TotalesAsistencias[0]}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_2daSesion,Path=ActualWidth}" HorizontalAlignment="Center">
+                <TextBlock 
+                    x:Name="TextBlock_TotalAsistencias2"
+                    Text="{Binding TotalesAsistencias[1]}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_3raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_TotalAsistencias3"
+                    Text="{Binding TotalesAsistencias[2]}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel 
+            HorizontalAlignment="Left" 
+            Orientation="Horizontal"
+            Grid.Row="2">
+            <Grid Width="{Binding ElementName=Header_Nombre,Path=ActualWidth}">
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    Margin="5,0,0,0" 
+                    Text="TOTAL EN EL SIT" 
+                    FontWeight="Bold"
+                    HorizontalAlignment="Right"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_1raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_TotalSIT1"
+                    Text="{Binding TotalesSIT[0]}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_2daSesion,Path=ActualWidth}" HorizontalAlignment="Center">
+                <TextBlock 
+                    x:Name="TextBlock_TotalSIT2"
+                    Text="{Binding TotalesSIT[1]}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_3raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_TotalSIT3"
+                    Text="{Binding TotalesSIT[2]}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel 
+            HorizontalAlignment="Left" 
+            Orientation="Horizontal"
+            Grid.Row="3">
+            <Grid Width="{Binding ElementName=Header_Nombre,Path=ActualWidth}">
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    Margin="5,0,0,0" 
+                    Text="PORCENTAJE DE ASISTENCIAS" 
+                    FontWeight="Bold"
+                    HorizontalAlignment="Right"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_1raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_PorcentajeAsistencias1"
+                    Text="{Binding PorcentajesAsistencias[0],
+                                   StringFormat={}{0:#0.00'%'}}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_2daSesion,Path=ActualWidth}" HorizontalAlignment="Center">
+                <TextBlock 
+                    x:Name="TextBlock_PorcentajeAsistencias2"
+                    Text="{Binding PorcentajesAsistencias[1],
+                                   StringFormat={}{0:#0.00'%'}}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_3raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_PorcentajeAsistencias3"
+                    Text="{Binding PorcentajesAsistencias[2],
+                                   StringFormat={}{0:#0.00'%'}}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel 
+            HorizontalAlignment="Left" 
+            Orientation="Horizontal"
+            Grid.Row="4">
+            <Grid Width="{Binding ElementName=Header_Nombre,Path=ActualWidth}">
+                <TextBlock 
+                    VerticalAlignment="Center"
+                    Margin="5,0,0,0" 
+                    Text="PORCENTAJE DE FALTAS" 
+                    FontWeight="Bold"
+                    HorizontalAlignment="Right"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_1raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_PorcentajeFaltas1"
+                    Text="{Binding PorcentajesFaltas[0],
+                                   StringFormat={}{0:#0.00'%'}}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_2daSesion,Path=ActualWidth}" HorizontalAlignment="Center">
+                <TextBlock 
+                    x:Name="TextBlock_PorcentajeFaltas2"
+                    Text="{Binding PorcentajesFaltas[1],
+                                   StringFormat={}{0:#0.00'%'}}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+            <Grid Width="{Binding ElementName=Header_3raSesion,Path=ActualWidth}">
+                <TextBlock 
+                    x:Name="TextBlock_PorcentajeFaltas3"
+                    Text="{Binding PorcentajesFaltas[2],
+                                   StringFormat={}{0:#0.00'%'}}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Margin="5,0,0,0"></TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

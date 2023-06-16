@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="01fcb149457e4aff8fe7ef1df9efac23" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="ModeloTutorias.Academicos" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.AcademicosUsuarios" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.Estudiantes" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.ExperienciasEducativas" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.ExperienciasEducativas_Academicos" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.FechasTutorias" Width="1.5" PointX="3.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.Horarios" Width="1.5" PointX="11.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.PeriodosEscolares" Width="1.5" PointX="1.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.Problematicas" Width="1.5" PointX="13.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.ProgramasEducativos" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.Roles" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.Soluciones" Width="1.5" PointX="15.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.TutoriasAcademicas" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModeloTutorias.AcademicosRoles" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="ModeloTutorias.FK_AcademicosRoles_Id_Academico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Estudiantes_idAcademico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_ExperienciasEduacativas_Academicos_Id_Academico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Soluciones_Id_Academico" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_TutoriasAcademicas_Academicos" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_AcademicosRoles_Id_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Estudiantes_id_Programa_Educativo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Horarios_matricula" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Problematicas_matricula" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_ExperienciasEduacativas_Academicos_Id_Experiencia_Educativa" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_ExperienciasEduacativas_Academicos_Id_Programa_Educativo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Problematicas_NRC" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_FechasTutorias__Id_Periodo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_FechasTutorias_ProgramasEducativos" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_TutoriasAcademicas_Id_FechaTuria" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Horarios_Id_Tutoria_academica" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Problematicas_Id_Tutoria_Academica" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_Soluciones_IdProblematica" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_AcademicosRoles_Id_Programa_Educativo" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.FK_AcademicosRoles_Id_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.ExperienciasEducativas_PeriodosEscolares" ManuallyRouted="false" />
+        <AssociationConnector Association="ModeloTutorias.ExperienciasEducativas_Estudiantes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

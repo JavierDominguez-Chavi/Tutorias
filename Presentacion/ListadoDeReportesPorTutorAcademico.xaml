@@ -1,0 +1,61 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      xmlns:Dominio="clr-namespace:Dominio;assembly=Dominio" x:Class="Presentacion.ListadoDeReportesPorTutorAcademico"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListadoDeReportesPorTutorAcademico">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition  Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Label Content="Listado de Reportes por Tutor Académico" 
+               Grid.Row="0" HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontFamily="Segoe UI" FontSize="16" FontWeight="Bold"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Stretch" Width="794" VerticalAlignment="Center" >
+            <TextBlock FontSize="14" FontWeight="Medium" HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" Height="32" TextAlignment="Center"><Run Text="Periodo escolar:"/></TextBlock>
+            <ComboBox x:Name="ComboBox_PeriodosEscolares" Width="216" Height="32" Margin="10, 0, 10, 0" SelectionChanged="ComboBox_PeriodosEscolares_SelectionChanged">
+            </ComboBox>
+            <TextBlock FontSize="14" FontWeight="Medium" Grid.Row="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 0, 10, 0"
+                       Height="32"><Run Text="Tutor académico:"/></TextBlock>
+            <TextBox  x:Name="TextBox_Academico" Width="171" Height="32" TextChanged="TextBox_Academico_TextChanged"/>
+        </StackPanel>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding}" 
+                  SelectionUnit="FullRow" SelectionMode="Single" 
+                  CanUserResizeColumns="False" CanUserResizeRows="True" x:Name="DataGrid_ReportePorTutorAcademico" CanUserAddRows="False"
+                  CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="True" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Periodo Escolar" x:Name="DataGridColumn_PeriodoEscolar" Width="*" 
+                                    Binding="{Binding PeriodoEscolar}"/>
+                <DataGridTextColumn Header="No. Sesión" x:Name="DataGridColumn_NoSesion" Width="*"
+                                    Binding="{Binding NumeroDeSesion}"/>
+                <DataGridTextColumn Header="Tutor Académico" x:Name="DataGridColumn_TutorAcademico" Width="*"
+                                    Binding="{Binding NombreTutorAcademico}"/>
+                <DataGridTextColumn Header="Estado" x:Name="DataGridColumn_Estado" Width="*"
+                                    Binding="{Binding EstadoEscrito}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Content="Consultar" Margin="0,0,30,0" 
+                    Grid.Row="2" VerticalAlignment="Top" 
+                    Height="33" Width="85" FontSize="14" Background="MediumAquamarine" BorderBrush="MediumAquamarine" Click="Button_Click" />
+            <Button Content="Regresar" HorizontalAlignment="Left" Margin="0,0,30,0" Grid.Row="2" VerticalAlignment="Top"
+                    Height="33" Width="85" FontSize="14" BorderBrush="#FFDDDDDD" Click="Regresar"/>
+        </StackPanel>
+        <Label x:Name="Label_NoTutorias" Content="No se encontraron Reportes de Tutoría para el Periodo Escolar seleccionado" 
+               Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Visibility="Collapsed"/>
+
+
+
+    </Grid>
+</Page>

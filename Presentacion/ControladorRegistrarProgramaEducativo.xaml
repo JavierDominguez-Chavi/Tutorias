@@ -1,0 +1,59 @@
+﻿<Page x:Class="Presentacion.ControladorRegistrarProgramaEducativo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ControladorRegistrarProgramaEducativo">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100">
+            </RowDefinition>
+            <RowDefinition Height="*">
+
+            </RowDefinition>
+            <RowDefinition Height="100">
+
+            </RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Content="Gestión de Programas Educativos" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="16" FontWeight="Bold"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <DataGrid x:Name="DataGrid_ProgramasEducativos" Grid.Row="1" ItemsSource="{Binding}" 
+                      VerticalAlignment="Top"  Margin="0, 0, 30, 0"  Width="304" MinHeight="0" 
+                      MaxHeight="300" HorizontalContentAlignment="Center" Background="{x:Null}" 
+                      AutoGenerateColumns="True" SelectionUnit="FullRow" SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False" BorderBrush="#FF989898" SelectionChanged="DataGrid_ProgramasEducativos_SelectionChanged" Height="218">
+                <DataGrid.Columns>
+                    <DataGridTextColumn  x:Name="ProgramaEdu" Header="Programa educativo" Width="*" Binding="{Binding NombreProgramaEducativo}" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Header="" Width="40" x:Name="ColumnaEditar">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  Click="ButtonEditar_Click" x:Name="Botton_Editar">
+                                    <Image Source="/editar.png"  Height="20" Width="20"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel x:Name="StackPanel_Agregar" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="50, 0, 0, 0">
+                <Label x:Name="Label_Instruccion" Content="Agregar nuevo programa educativo:" Width="294" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                <TextBox x:Name="TextBox_ProgramaEducativo" Margin="0, 0, 0, 0" Height="32" Width="195" TextChanged="TextBox_ProgramaEducativo_TextChanged">
+                </TextBox>
+                <Label x:Name="Label_CampoAcepta" Content="El campo solo acepta letras y números" FontSize="10" Foreground="Red" HorizontalAlignment="Right" VerticalAlignment="Top" Visibility="Collapsed"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 15, 0, 0">
+                    <Button Content="Guardar" Name="Button_Guardar" Click="Button_Guardar_Click" Margin="0, 0, 0, 0" Height="32" Width="67"/>
+                    <Button Content="Cancelar" Name="Button_Cancelar" Click="Button_Cancelar_Click" Margin="20, 0, 0, 0" Width="67"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 0, 30, 0">
+            <Button x:Name="Button_Regresar" Content="Regresar"  Grid.Row="2" Margin="20" Height="32" Width="67" Click="Button_Regresar_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

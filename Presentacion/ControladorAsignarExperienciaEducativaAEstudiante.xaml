@@ -1,0 +1,116 @@
+﻿<Page x:Class="Presentacion.ControladorAsignarExperienciaEducativaAEstudiante"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1280"
+      
+      Title="ControladorAsignarExperienciaEducativaAEstudiante">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.RowSpan="2">
+            <Grid RenderTransformOrigin="0.502,0.502" Margin="0,0,0,381">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="52*"/>
+                    <RowDefinition Height="61*"/>
+                    <RowDefinition Height="Auto" MinHeight="192"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border HorizontalAlignment="Left" Height="50" Grid.Row="1"  VerticalAlignment="Center"  Width="436" Margin="60,0,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="309*"/>
+                            <ColumnDefinition Width="127*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Width="auto" Height="29" Content="Matricula del estudiante" FontSize="14"  HorizontalAlignment="Left" Margin="120,-29,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                        <Button FontSize="24" Background="DarkBlue"  Foreground="White" Content="Buscar" HorizontalAlignment="Left" Height="50" Width="100" VerticalAlignment="Center" Click="Button_Click"/>
+                        <TextBox x:Name="TBBusquedaEstudiante" FontSize="24" TextWrapping="Wrap" Height="50" Width="315"  Margin="122,0,-2,0" Grid.ColumnSpan="2" />
+                    </Grid>
+                </Border>
+
+                <Border HorizontalAlignment="Left" Height="50" Grid.Row="1" Grid.Column="1"  VerticalAlignment="Center"  Width="436" Margin="60,0,0,0">
+                    <Grid>
+                        <Label Width="auto" Height="29" Content="NRC o Nombre de la experiencia educativa" FontSize="14"  HorizontalAlignment="Left" Margin="120,-29,0,0" VerticalAlignment="Top"/>
+
+                        <Button FontSize="24" Background="DarkBlue" Foreground="White" Content="Buscar" HorizontalAlignment="Left" Height="49" Width="100" VerticalAlignment="Center" Click="ObtenerExperienciasEducativas" />
+                        <TextBox x:Name="TBBusquedaExperienciaEducativa" FontSize="24" TextWrapping="Wrap" Height="50" Width="315" Margin="120,0,0,0"/>
+                    </Grid>
+                </Border>
+                <Grid HorizontalAlignment="Center" Height="192" Grid.Row="2" VerticalAlignment="Center" Width="520">
+                    <Label BorderThickness="1" BorderBrush="Black" Content="Estudiantes Resultados" FontSize="24"  HorizontalAlignment="Left"  Height="50" Width="320" VerticalAlignment="Top"/>
+                    <ListBox x:Name="ListBEstudiantesResultados" Width="520" FontSize="24" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,50,0,0" SelectionChanged="ListBEstudiantesResultados_SelectionChanged"/>
+                </Grid>
+                <Grid HorizontalAlignment="Center" Height="192" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Width="520">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="51*"/>
+                        <ColumnDefinition Width="79*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="83*"/>
+                        <RowDefinition Height="13*"/>
+                    </Grid.RowDefinitions>
+                    <Label BorderBrush="Black" BorderThickness="1" Content="Experiencias educativas" FontSize="24"  HorizontalAlignment="Left"  Height="50" Width="320" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <ListBox x:Name="ListBExperienciasResultados" Width="520" FontSize="24" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,50,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2" SelectionChanged="ListBExperienciasResultados_SelectionChanged"/>
+                </Grid>
+            </Grid>
+            <Grid Margin="0,376,0,0" Height="376" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="188"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="619*"/>
+                    <ColumnDefinition Width="21*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="358,0,0,0" Width="789" Grid.Column="0" Height="58">
+                    <Label Content="Estudiante seleccionado" FontSize="24" Background="Gray"  Height="50" Width="315" BorderThickness="1,1,1,1" BorderBrush="Black" Margin="0,0,0,4" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <Label  FontSize="24" VerticalContentAlignment="Center" x:Name="LbEstudiante" Content="No Encontrado" HorizontalAlignment="Left" Margin="315,0,0,4" Width="474" BorderThickness="1,1,1,1" BorderBrush="Black" Height="50" VerticalAlignment="Bottom"/>
+
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="184,10,183,0" Height="188" VerticalAlignment="Top">
+                        <Label Content="Experiencias del estudiante" Background="Gray" VerticalAlignment="Top" Height="26" Margin="0,0,97,0" Grid.ColumnSpan="2"/>
+                        <ListView x:Name="LVExperienciasDeEstudiantes" Height="150" HorizontalAlignment="Left" d:ItemsSource="{d:SampleData ItemCount=5}" Width="250" VerticalAlignment="Top" Margin="0,26,0,0" Grid.ColumnSpan="2">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Margin="184,10,183,0" Height="188" VerticalAlignment="Top">
+                        <Label Content="Experiencias del estudiante" Background="Gray" VerticalAlignment="Top" Height="26" Margin="0,0,97,0" Grid.ColumnSpan="2"/>
+                        <ListView x:Name="LVExperienciasAAsignar" Height="150" HorizontalAlignment="Left" d:ItemsSource="{d:SampleData ItemCount=5}" Width="250" VerticalAlignment="Top" Margin="0,26,0,0" Grid.ColumnSpan="2" SelectionChanged="LVExperienciasAAsignar_SelectionChanged">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+                </Grid>
+                <Button FontSize="24" Background="DarkBlue" Grid.Row="2" Foreground="White" Content="Guardar" HorizontalAlignment="Left" Height="50" Width="100" VerticalAlignment="Top" Click="BTNGuardarAsignacion" Margin="1047,25,0,0"/>
+                <Button FontSize="24" Background="DarkBlue" Grid.Row="2" Foreground="White" Content="Cancelar" HorizontalAlignment="Left" Height="50" Width="100" VerticalAlignment="Top"  Margin="65,25,0,0" Click="Button_Click_1"/>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

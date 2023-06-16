@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="caption_Aviso" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+  <data name="caption_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="caption_Exito" xml:space="preserve">
+    <value>Operación exitosa</value>
+  </data>
+  <data name="messageBoxText_AcademicoExistente" xml:space="preserve">
+    <value>El académico que desea registrar ya se encuentra en el sistema.</value>
+  </data>
+  <data name="messageBoxText_AcademicoNoSeleccinado" xml:space="preserve">
+    <value>Académico no seleccionado, Por favor seleccione alguno de la tabla e intentelo de nuevo.</value>
+  </data>
+  <data name="messageBoxText_AcademicosNoEncontrados" xml:space="preserve">
+    <value>Por favor verifique que haya académicos sin roles registrados y que tenga buena conexión. </value>
+  </data>
+  <data name="messageBoxText_CampoCorreoInstitucionalExcedeLimite" xml:space="preserve">
+    <value>El campo: Correo electrónico institucional debe tener una longitud máxima de 30 caracteres.</value>
+  </data>
+  <data name="messageBoxText_CampoCorreoPersonalExcedeLimite" xml:space="preserve">
+    <value>El campo: Correo electrónico personal debe tener una longitud máxima de 100 caracteres.</value>
+  </data>
+  <data name="messageBoxText_CampoMatriculaExcedeLimite" xml:space="preserve">
+    <value>El campo para a matricula debe tener una longitud máxima de 9 caracteres.</value>
+  </data>
+  <data name="messageBoxText_CamposNombreYApellidosExcedenLimite" xml:space="preserve">
+    <value>Los campos: Nombre, Apellido paterno y Apellido materno deben tener una longitud máxima de 50 caracteres.</value>
+  </data>
+  <data name="messageBoxText_CamposNoSeleccionados" xml:space="preserve">
+    <value>Por favor, verifique que todos los campos estén seleccionados.</value>
+  </data>
+  <data name="messageBoxText_CamposVacios" xml:space="preserve">
+    <value>No puede dejar ningún campo vacío.Por favor, verifique que todos los campos estén llenos.</value>
+  </data>
+  <data name="messageBoxText_CancelarOperacion" xml:space="preserve">
+    <value>¿Está seguro de que desea cancelar la operación?</value>
+  </data>
+  <data name="messageBoxText_CancelarOperacionReporte" xml:space="preserve">
+    <value>¿Está seguro de que desea cancelar la operación? Toda la información se borrará, incluidas las problemáticas.</value>
+  </data>
+  <data name="messageBoxText_Conexion" xml:space="preserve">
+    <value>No se pudo conectar con la base de datos. Por favor, inténtelo más tarde...</value>
+  </data>
+  <data name="messageBoxText_ConexionInternet" xml:space="preserve">
+    <value>Hubo un problema de red. Por favor verifique su conexión.</value>
+  </data>
+  <data name="messageBoxText_ConfirmacionCambios" xml:space="preserve">
+    <value>¿Deseas guardar la información?</value>
+  </data>
+  <data name="messageBoxText_EstudianteExistente" xml:space="preserve">
+    <value>Los datos del estudiante modificado ya se encuentran registrados en el sistema.</value>
+  </data>
+  <data name="messageBoxText_Exito" xml:space="preserve">
+    <value>La información se ha registrado correctamente.</value>
+  </data>
+  <data name="messageBoxText_FechaTutoriaConcluida" xml:space="preserve">
+    <value>Lo siento!!, fecha de tutoría ha terminado :'(</value>
+  </data>
+  <data name="messageBoxText_HorarioSinRegistrar" xml:space="preserve">
+    <value>Para llenar el reporte de tutoría antes debe registrar el horario de la sesión</value>
+  </data>
+  <data name="messageBoxText_ProblematicaNoSeleccionada" xml:space="preserve">
+    <value>Problemática no seleccionada, Por favor seleccione alguna de la tabla e intentelo de nuevo.</value>
+  </data>
+  <data name="messageBoxText_ProgramasEducativosNoAsignados" xml:space="preserve">
+    <value>Hubo un error de conexión al asignar los siguientes programas educativos al académico: </value>
+  </data>
+  <data name="messageBoxText_ProgramasEducativosNoSeleccionados" xml:space="preserve">
+    <value>Por favor seleccione por lo menos un programa educativo.</value>
+  </data>
+  <data name="messageBoxText_RegistroExitoso" xml:space="preserve">
+    <value>La información se registró correctamente en el sistema.</value>
+  </data>
+  <data name="messageBoxText_ReporteEntregado" xml:space="preserve">
+    <value>Ya ha entregado el reporte para la fecha actual de tutoria</value>
+  </data>
+  <data name="messageBoxText_ReporteTutoriaVacio" xml:space="preserve">
+    <value>Por favor ingrese por lo menos un comentario general o una problemática académica.</value>
+  </data>
+  <data name="messageBoxText_SinCambios" xml:space="preserve">
+    <value>Sin cambios detectados</value>
+  </data>
+  <data name="messageBoxText_SinReportesRegistrados" xml:space="preserve">
+    <value>Ningún tutor ha registrado su reporte de tutoría académica para esta fecha de tutoría.</value>
+  </data>
+  <data name="messageBoxTitle_AcademicoExistente" xml:space="preserve">
+    <value>Académico existente</value>
+  </data>
+  <data name="messageBoxTitle_AcademicoNoSeleccionado" xml:space="preserve">
+    <value>Académico no seleccionado.</value>
+  </data>
+  <data name="messageBoxTitle_AcademicosNoEncontrados" xml:space="preserve">
+    <value>Académicos no encontrados.</value>
+  </data>
+  <data name="messageBoxTitle_CamposVacios" xml:space="preserve">
+    <value>Campos vacíos</value>
+  </data>
+  <data name="messageBoxTitle_CancelarOperacion" xml:space="preserve">
+    <value>Cancelar operación</value>
+  </data>
+  <data name="messageBoxTitle_Conexion" xml:space="preserve">
+    <value>Pérdida de conexión</value>
+  </data>
+  <data name="messageBoxTitle_ConexionInternet" xml:space="preserve">
+    <value>Pérdida de conexión a internet</value>
+  </data>
+  <data name="messageBoxTitle_ConfirmacionCambios" xml:space="preserve">
+    <value>Confirmación</value>
+  </data>
+  <data name="messageBoxTitle_EstudianteExistente" xml:space="preserve">
+    <value>Estudiante existente</value>
+  </data>
+  <data name="messageBoxTitle_FechaTutoriaConcluida" xml:space="preserve">
+    <value>La fecha de tutoría termino</value>
+  </data>
+  <data name="messageBoxTitle_HorarioSinRegistrar" xml:space="preserve">
+    <value>Horario no registrado</value>
+  </data>
+  <data name="messageBoxTitle_LimiteDeCampos" xml:space="preserve">
+    <value>Límite de campos</value>
+  </data>
+  <data name="messageBoxTitle_ProblematicaNoSeleccionada" xml:space="preserve">
+    <value>Problemática no seleccionada</value>
+  </data>
+  <data name="messageBoxTitle_ProgramasEducativosNoSeleccionados" xml:space="preserve">
+    <value>Programa educativo no seleccionado</value>
+  </data>
+  <data name="messageBoxTitle_ReporteEntregado" xml:space="preserve">
+    <value>Reporte entregado</value>
+  </data>
+  <data name="messageBoxTitle_ReporteTutoriaVacio" xml:space="preserve">
+    <value>Reporte de tutoría vacío</value>
+  </data>
+  <data name="messageBoxTitle_SinCambios" xml:space="preserve">
+    <value>Debe modificar por lo menos un campo.</value>
+  </data>
+  <data name="messageBoxTitle_SinReportesRegistrados" xml:space="preserve">
+    <value>Sin reportes registrados.</value>
+  </data>
+  <data name="message_ContenidoAlfabeticoRequerido" xml:space="preserve">
+    <value>Campo obligatorio de solo letras.</value>
+  </data>
+  <data name="message_ContenidoAlfanumericoRequerido" xml:space="preserve">
+    <value>Campo obligatorio de solo letras y números.</value>
+  </data>
+  <data name="message_ContenidoCorreoInstitucionalInvalido" xml:space="preserve">
+    <value>Correo institucional inválido.</value>
+  </data>
+  <data name="message_ContenidoCorreoPersonalInvalido" xml:space="preserve">
+    <value>Correo personal inválido.</value>
+  </data>
+</root>

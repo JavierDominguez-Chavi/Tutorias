@@ -1,0 +1,96 @@
+﻿<Page x:Class="Presentacion.ControladorModificarHorariosSesionTutoria"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Background="White"
+      Title="ModificarHorariosSesionTutoria">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_TituloDePagina" Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       Text="Modificar Horarios De Sesión De Tutoría" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" 
+                       FontSize="18" Width="267"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            <Label Name="Label_Periodo" Content="Periodo escolar:" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="0" FontSize="18"/>
+            <Label Name="Label_PeriodoEscolarActual"  Content="Periodo escolar actual" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.508,0.072" Grid.Column="1" FontSize="18"/>
+            <Label Name="Label_SesionTutoria" Content="Sesión de tutoría:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="3" Width="157" Margin="10,3,0,0" FontSize="18"/>
+            <ComboBox Name="ComboBox_SesionesTutoria"  HorizontalAlignment="Left" Margin="24,12,0,0" VerticalAlignment="Top" Width="204" FontWeight="Bold" Grid.Column="4" FontSize="18" SelectionChanged="SeleccionarFecha"  />
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="1" x:Name="DataGrid_EstudiantesHorarios" ColumnWidth="*"  HeadersVisibility="Column" IsReadOnly="True"
+                      AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_Matricula"
+                        Header="MATRÍCULA" 
+                        IsReadOnly="True"
+                        Binding="{Binding Matricula}"/>
+
+                    <DataGridTextColumn 
+                        x:Name="DataGridTextColumn_Nombre"
+                        Header="NOMBRE" 
+                        IsReadOnly="True"
+                        Binding="{Binding NombreCompleto}"/>
+                    <DataGridTemplateColumn 
+                        x:Name="DataGridTemplateColumn_Hora" 
+                        Header="HORA">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <xctk:IntegerUpDown x:Name="IntegerUpDown_Hora" Minimum="7" Maximum="21" Value="{Binding Hora}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="DataGridTemplateColumn_Minutos" Header="MINUTOS">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <xctk:IntegerUpDown x:Name="IntegerUpDown_Minutos" Minimum="00" Maximum="59" Value="{Binding Minutos}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Button_Cancelar" Content="Cancelar" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Click="Button_Cancelar_Click"/>
+            <Button x:Name="Button_Guardar" Content="Guardar" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Width="72" Grid.Column="2" FontWeight="Bold" Click="Button_Guardar_Click" />
+
+        </Grid>
+
+    </Grid>
+</Page>

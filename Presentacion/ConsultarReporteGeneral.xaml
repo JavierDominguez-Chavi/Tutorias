@@ -1,0 +1,210 @@
+﻿<Page x:Class="Presentacion.ConsultarReporteGeneral"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:Dominio="clr-namespace:Dominio;assembly=Dominio"
+      xmlns:local="clr-namespace:Presentacion"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="White"
+      Loaded="ObtenerTodosLosPeriodosEscolares"
+      Title="ConsultarReporteGeneral">
+
+    <Page.Resources>
+        <CollectionViewSource x:Key="ViewSource_PeriodosEscolares" d:DesignSource="{d:DesignInstance {x:Type Dominio:PeriodosEscolares}}"/>
+        <CollectionViewSource x:Key="ViewSource_SesionesPeriodo" d:DesignSource="{d:DesignInstance {x:Type Dominio:FechasTutorias}}"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_TituloPagina" Grid.Column="1"  TextWrapping="Wrap" VerticalAlignment="Center"
+                       TextAlignment="Center" Text="CONSULTAR REPORTE GENERAL DE TUTORÍAS ACADÉMICAS" FontWeight="Bold" FontSize="20"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="Label_IndicacionTablaPeriodo" Grid.Row="0" Grid.Column="1" Background="Gray" VerticalAlignment="Bottom"
+                   FontSize="16" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" Text="Seleccione el periodo escolar: "/>
+            </Label>
+
+            <Label x:Name="Label_IndicacionTablaSesionesPeriodo" Grid.Row="0" Grid.Column="3" Background="Gray" VerticalAlignment="Bottom"
+                   FontSize="16" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" Text="Seleccione la sesión: "/>
+            </Label>
+
+            <DataGrid x:Name="DataGrid_PeriodosEscolares" Grid.Row="1" Grid.Column="1" ColumnWidth="*"  HeadersVisibility="Column" 
+                      DataContext="{StaticResource ViewSource_PeriodosEscolares}"
+                      IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected"
+                      SelectionChanged="ObtenerSesionesPeriodoSeleccionado">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="DataGridTemplateColumn_Semestre" Header="SEMESTRE" IsReadOnly="True" Width="*">
+                        
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="TextBlock_Semestre" HorizontalAlignment="Center" Text="{Binding Nombre}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="DataGridTemplateColumn_FechaInicioPeriodo" Header="FECHA INICIO" IsReadOnly="True" 
+                                            Width="*">
+
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="TextBlock_FechaInicioPeriodo" HorizontalAlignment="Center" 
+                                           Text="{Binding FechaInicio, StringFormat='{}{0:dd/MMMM/yyyy}', ConverterCulture='es-ES'}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="DataGridTemplateColumn_FechaFinPeriodo" Header="FECHA FIN" IsReadOnly="True" 
+                                            Width="*">
+
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="TextBlock_FechaFinPeriodo" HorizontalAlignment="Center" 
+                                           Text="{Binding FechaFin, StringFormat='{}{0:dd/MMMM/yyyy}', ConverterCulture='es-ES'}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid x:Name="DataGrid_SesionesPeriodo" Grid.Row="1" Grid.Column="3" ColumnWidth="*"  HeadersVisibility="Column" 
+                      DataContext="{StaticResource ViewSource_SesionesPeriodo}"
+                      IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="DataGridTemplateColumn_NumeroSesion" Header="#SESIÓN" IsReadOnly="True" 
+                                            Width="*">
+
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="TextBlock_NumeroSesion" HorizontalAlignment="Center" 
+                                           Text="{Binding NumeroSesion}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="DataGridTemplateColumn_FechaTutoria" Header="FECHA TUTORÍA" IsReadOnly="True" 
+                                            Width="*">
+
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="TextBlock_FechaTutoria" HorizontalAlignment="Center" 
+                                           Text="{Binding FechaTutoria, StringFormat='{}{0:dd/MMMM/yyyy}', ConverterCulture='es-ES'}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="DataGridTemplateColumn_FechaCierre" Header="FECHA CIERRE" IsReadOnly="True" 
+                                            Width="*">
+
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="TextBlock_FechaCierre" HorizontalAlignment="Center" 
+                                           Text="{Binding FechaCierreDeReporte, StringFormat='{}{0:dd/MMMM/yyyy}', ConverterCulture='es-ES'}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.015*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="Button_Consultar" Grid.Column="3" Content="Consultar" Grid.Row="1" VerticalAlignment="Center" 
+                    FontSize="16" FontWeight="Bold" Height="34" Click="ConsultaReporteGeneral"/>
+            <Button x:Name="Button_Regresar" Grid.Column="5" Content="Regresar" Grid.Row="1" VerticalAlignment="Center" 
+                    FontSize="16" FontWeight="Bold" Height="34" Click="SalirVentanaConsultarReporteGeneral"/>
+        </Grid>
+    </Grid>
+</Page>

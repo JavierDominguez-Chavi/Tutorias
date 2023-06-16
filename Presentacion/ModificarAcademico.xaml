@@ -1,0 +1,221 @@
+﻿<Page x:Class="Presentacion.ModificarAcademico"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:Dominio="clr-namespace:Dominio;assembly=Dominio"
+      xmlns:local="clr-namespace:Presentacion"
+      d:DataContext="{d:DesignInstance Type=Dominio:Academicos}"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="White"
+      Loaded="CargarInformacionPagina"
+      Title="ModificarAcademico">
+
+    <Page.Resources>
+        <CollectionViewSource x:Key="ViewSource_ProgramasEducativos" d:DesignSource="{d:DesignInstance {x:Type Dominio:ProgramasEducativos}}"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_TituloPagina" Grid.Column="1"  TextWrapping="Wrap" VerticalAlignment="Center"
+                       TextAlignment="Center" Text="INFORMACIÓN DEL ACADÉMICO" FontWeight="Bold" FontSize="20"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height=".1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="TextBlock_NombreInvalido" Grid.Row="2" TextWrapping="Wrap"
+                               VerticalAlignment="Top" FontSize="14" Foreground="Red"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="TexBlock_ApellidoPaternoInvalido" Grid.Row="2" TextWrapping="Wrap"
+                               VerticalAlignment="Top" Foreground="Red" FontSize="14"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="TextBlock_ApellidoMaternoInvalido" Grid.Row="2" TextWrapping="Wrap" 
+                               VerticalAlignment="Top" Foreground="Red" FontSize="14"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="TextBlock_CorreoPersonalInvalido"  Grid.Row="2" TextWrapping="Wrap"
+                               VerticalAlignment="Top" Foreground="Red" FontSize="14"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="TextBlock_CorreoInstitucionalInvalido" Grid.Row="2" TextWrapping="Wrap"
+                               Foreground="Red" FontSize="14"/>
+                </Grid>
+
+                <Label x:Name="Label_NombreAcademico" Grid.Row="0" 
+                   Background="Gray" VerticalAlignment="Center" FontSize="16" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                    <TextBlock TextWrapping="Wrap" Text="Nombres (s): "/>
+                </Label>
+                <Label x:Name="Label_ApellidoPaternoAcademico" Grid.Row="1"
+                   Background="Gray" VerticalAlignment="Center" FontSize="16" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                    <TextBlock TextWrapping="Wrap" Text="Apellido paterno: "/>
+                </Label>
+                <Label x:Name="Label_ApellidoMaternoAcademico" Grid.Row="2" 
+                   Background="Gray" VerticalAlignment="Center" FontSize="16" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                    <TextBlock TextWrapping="Wrap" Text="Apellido materno: "/>
+                </Label>
+                <Label x:Name="Label_CorreoPersonalAcademico" Grid.Row="3" 
+                   Background="Gray"  VerticalAlignment="Center" FontSize="16" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                    <TextBlock TextWrapping="Wrap" Text="Correo eléctronico personal: "/>
+                </Label>
+                <Label x:Name="Label_CorreoInstitucionalAcademico" Grid.Row="4" 
+                   Background="Gray" VerticalAlignment="Center" FontSize="16" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                    <TextBlock TextWrapping="Wrap" Text="Correo eléctronico institucional: "/>
+                </Label>
+                <xctk:WatermarkTextBox x:Name="TextBox_NombreAcademico" Padding="2" Grid.Column="1" Grid.Row="0"
+                                   VerticalAlignment="Center" FontSize="16" CharacterCasing="Normal" 
+                                   Height="30" MaxLength="50" Text="{Binding Nombre}" 
+                                   IsReadOnly="True"/>
+                <xctk:WatermarkTextBox x:Name="TextBox_ApellidoPaternoAcademico" Padding="2" Grid.Column="1" Grid.Row="1"
+                                   VerticalAlignment="Center" FontSize="16" CharacterCasing="Normal" 
+                                   Height="30" MaxLength="50" Text = "{Binding ApellidoPaterno}" IsReadOnly="True"/>
+                <xctk:WatermarkTextBox x:Name="TextBox_ApellidoMaternoAcademico" Padding="2" Grid.Column="1" Grid.Row="2"
+                                   VerticalAlignment="Center" FontSize="16" CharacterCasing="Normal" 
+                                   Height="30" MaxLength="50" Text = "{Binding ApellidoMaterno}" IsReadOnly="True"/>
+                <xctk:WatermarkTextBox x:Name="TextBox_CorreoPersonalAcademico" Padding="2" Grid.Column="1" Grid.Row="3"
+                                   VerticalAlignment="Center" FontSize="16" CharacterCasing="Normal" 
+                                   Height="30" MaxLength="100" Text = "{Binding CorreoPersonal}" IsReadOnly="True"/>
+                <xctk:WatermarkTextBox x:Name="TextBox_CorreoInstitucionalAcademico" Padding="2" Grid.Column="1" Grid.Row="4"
+                                   VerticalAlignment="Center" FontSize="16" CharacterCasing="Normal" MaxLength="30"
+                                   Height="30" Text = "{Binding CorreoInstitucional}" IsReadOnly="True"/>
+
+            </Grid>
+
+            <Grid Grid.Column="2" DataContext="{StaticResource ViewSource_ProgramasEducativos}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1.4*"/>
+                    <RowDefinition Height=".1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="100*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".7*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height=".5*"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Column="1" Grid.Row="1" x:Name="DataGrid_ProgramasEducativos" HeadersVisibility="Column" IsReadOnly="False"
+                      AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                x:Name="DataGridTextColumn_ProgramaEducativo"
+                                Header="PROGRAMA EDUCATIVO" 
+                                IsReadOnly="True"
+                                Width="4*"
+                                Binding="{Binding NombreProgramaEducativo}"/>
+                            <DataGridTemplateColumn Header="SELECCIÓN" Width="1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox x:Name="CheckBox_SeleccionProgramaEducativo" HorizontalAlignment="Center" 
+                                                  IsEnabled="{Binding ElementName=CheckBox_EditarAcademico, Path=IsChecked}"
+                                                  IsChecked="{Binding ProgramaEducativoSeleccionado, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <CheckBox Grid.Column="1" Grid.Row="2" x:Name="CheckBox_EditarAcademico" Content="Editar"  VerticalAlignment="Center" FontSize="16" 
+                              VerticalContentAlignment="Center" FontWeight="Bold" Background="Red" Checked="HabilitarCamposTexto" Unchecked="DeshabilitarCamposTexto"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width=".2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.2*"/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="Button_Guardar" Grid.Column="1" Grid.Row="1" Content="Guardar" VerticalAlignment="Center"
+                            FontSize="16" FontWeight="Bold" Height="34" IsEnabled="{Binding ElementName=CheckBox_EditarAcademico, Path=IsChecked}" 
+                            Click="GuardarCambiosAcademico"/>
+                    <Button x:Name="Button_Salir" Grid.Column="3"  Grid.Row="1" Content="Salir"
+                            FontSize="16" FontWeight="Bold" Height="34" VerticalAlignment="Center" Click="RegresarPaginaAnterior"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
+

@@ -1,0 +1,288 @@
+﻿<Page x:Class="Presentacion.PaginaPrincipalCoordinadorDeTutorias"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PaginaPrincipalCoordinadorDeTutorias">
+
+    <Grid Background="White" ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="2" Grid.Row="1" ShowGridLines="False" Margin="0, 20, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Background="#FF3086A9" Click="AbrirReporteGeneral">
+            <Grid ShowGridLines="False" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Reportes" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/reporte.png"/>
+                <TextBlock Grid.Column="1" Text="Reporte general de tutorías académicas" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            </Button>
+            <Button Grid.Column="2" Background="#FF34BE82" Click="IrAConcentradoDeAsistencias">
+            <Grid x:Name="Grid_Asistencias">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Asistencia" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/asistencia.png"/>
+                <TextBlock Grid.Column="1" Text="Concentrado de asistencias" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            </Button>
+            <Button Grid.Column="4" Background="LightBlue" Click="IrAConsultarReportePorTutorAcademico">
+            <Grid x:Name="Grid_ReporteTutor" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Reportes" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/reporte.png"/>
+                <TextBlock Grid.Column="1" Text="Reporte por Tutor Académico" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            </Button>
+            <Button Grid.Row="2" Background="#FF79E6B6" Click="IrVentanaProblematicasAcademicas">
+            <Grid x:Name="Grid_Problematicas" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Problemáticas" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/problematica.png"/>
+                <TextBlock Grid.Column="1" Text="Problemáticas académicas y soluciones" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="2" Background="#FF59A5BD" Click="IrAVentanaListadoTutoresAcademcos">
+            <Grid x:Name="Grid_Tutores" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Tutores académicos" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/tutor.png"/>
+                <TextBlock Grid.Column="1" Text="Consulta de Tutores Académicos" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            </Button>
+            <Button Grid.Column="4" Grid.Row="2" Background="#FF5AD29C" Click="IrAConsultaEstudiante">
+            <Grid x:Name="Grid_Estudiantes" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Estudiantes" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/estudiante.png"/>
+                <TextBlock Grid.Column="1" Text="Consulta de Estudiantes" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"
+                        />
+            </Grid>
+            </Button>
+            <Button Grid.Row="4" Background="#FFF2F012" Click="IrARegistroDeEstudiantes">
+            <Grid x:Name="Grid_RegistrarTutor" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Estudiantes" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/estudiante.png"/>
+                <TextBlock Grid.Column="1" Text="Registrar Estudiantes" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"
+                        />
+            </Grid>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="4" Background="#FFF0ED48" Click="IrARegistrarTutor">
+            <Grid x:Name="Grid_AsignarTutor" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Tutores académicos" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/tutor.png"/>
+                <TextBlock Grid.Column="1" Text="Registrar Tutores Académicos" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            </Button>
+            <Button  Grid.Column="4" Grid.Row="4" Background="MediumSlateBlue" Click="IrAAsignacionDeTutores" >
+            <Grid x:Name="Grid_AsignarTutoresAcademicos" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="68*"/>
+                    <ColumnDefinition Width="79*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30.667"/>
+                </Grid.RowDefinitions>
+                <Label Content="Tutores académicos" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/tutor.png"/>
+                <TextBlock Grid.Column="1" Text="Asignar Tutores Académicos" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            </Button>
+            
+            <Button   Grid.Row="6" VerticalAlignment="Center" Background="LightSeaGreen" Click="IrAFechasTutoria">
+                <Grid x:Name="Grid_FechasTutorias2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="68*"/>
+                        <ColumnDefinition Width="79*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="30.667"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Fechas de Tutoría" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                    <Image HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"
+                       Source="/Imagenes/calendario.png"/>
+                    <TextBlock Grid.Column="1" Text="Gestionar fechas de tutoría" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"/>
+                </Grid>
+            </Button>
+            <Button Grid.Column="2" Grid.Row="6" Background="#FF6DDCBB" Click="IrAImportarEstudiantes">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="68*"/>
+                        <ColumnDefinition Width="79*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="30.667"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Estudiantes" HorizontalAlignment="Center" Grid.Row="1" 
+                       VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+                    <Image HorizontalAlignment="Center" Height="120" VerticalAlignment="Center" Width="120"
+                       Source="/Imagenes/archivo.png"/>
+                    <TextBlock Grid.Column="1" Text="Importar Estudiantes" 
+                           HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                       TextAlignment="Center" Grid.RowSpan="2" FontWeight="Bold" FontSize="20"
+                        />
+                </Grid>
+            </Button>
+        </Grid>
+
+        <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" Margin="0, 0, 0, 15">
+            <StackPanel Orientation="Horizontal">
+                <Image Height="30" Width="30" Source="/Imagenes/usuario.png" Margin="0, 0, 10, 0"/>
+                <Label x:Name="Label_NombreUsuario" 
+               Content="Nombre ApellidoMaterno ApellidoPaterno" 
+               VerticalAlignment="Top"  HorizontalContentAlignment="Left"
+               Width="334" FontWeight="Bold" FontSize="14" FontFamily="Yu Gothic UI Semibold"/>
+                <Button Background="White" Name="Button_CerrarSesion" Click="Button_CerrarSesion_Click">
+                    <Image Source="/Imagenes/cerrar-sesion.png" Height="30" Width="30"/>    
+                </Button>
+                
+            </StackPanel>
+            <Label Content="Coordinador de Tutorías" HorizontalAlignment="Center" FontFamily="Yu Gothic UI Semilight" FontSize="14"/>
+        </StackPanel>
+        <Label Grid.Column="1" Grid.ColumnSpan="2"
+               Content="Sistema de Gestión de Tutorías FEI" HorizontalAlignment="Left" 
+               VerticalAlignment="Center" FontWeight="Bold" FontSize="30" 
+               FontFamily="Yu Gothic UI Semibold"/>
+
+    </Grid>
+</Page>

@@ -1,0 +1,22 @@
+﻿<Page x:Class="Presentacion.ControladorListaDeEstudiantes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentacion"
+        mc:Ignorable="d"
+        Background="White"
+        d:DesignHeight="1080" d:DesignWidth="1920"
+        Title="Lista de estudiantes" >
+    <Grid >
+        <DataGrid Name="DataGrid_ListaEstudiantes"  Margin="510,260,510,238" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="estudianteSeleccionado">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding NombreCompleto}" Width="250" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Matricula" Binding="{Binding Matricula}" Width="250" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name ="Button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="119,717,0,0" VerticalAlignment="Top" Height="70" Width="178" Click="Regresar" FontSize="22"/>
+        <Label Name="Label_ListaEstudiantes" Content="Lista de estudiantes" HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24"/>
+        <Label Name="Label_Instruccion" Content="Selecciona un estudiante para ver su información" HorizontalAlignment="Center" Margin="0,145,0,0" VerticalAlignment="Top" FontSize="22"/>
+    </Grid>
+</Page>

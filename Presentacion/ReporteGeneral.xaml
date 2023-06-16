@@ -1,0 +1,246 @@
+﻿<Page x:Class="Presentacion.ReporteGeneral"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:Dominio="clr-namespace:Dominio;assembly=Dominio"
+      xmlns:local="clr-namespace:Presentacion"
+       d:DataContext="{d:DesignInstance Type=Dominio:FechasTutorias}"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="White"
+      Loaded="CargarInformacionTablas"
+      Title="ConsultarReporteGeneral">
+
+    <Page.Resources>
+        <CollectionViewSource x:Key="ViewSource_Problematicas" d:DesignSource="{d:DesignInstance {x:Type Dominio:Problematicas}}"/>
+        <CollectionViewSource x:Key="ViewSource_Tutorias" d:DesignSource="{d:DesignInstance {x:Type Dominio:TutoriasAcademicas}}"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_TituloDePagina" Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       Text="REPORTE REPORTE GENERAL DE TUTORÍAS ACADÉMICAS" VerticalAlignment="Center" TextAlignment="Center" 
+                       FontWeight="Bold" FontSize="18"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".03*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width=".03*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width=".03*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width=".03*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_NumeroTutoria" Grid.Column="1" HorizontalAlignment="Stretch"  TextWrapping="Wrap" 
+                        Text="{Binding TipoDeSesion, FallbackValue = 'NÚMERO DE TUTORÍA ACADÉMICA'}"  
+                       VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="18"/>
+            <TextBlock x:Name="TextBlock_Semestre" Grid.Column="3" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       Text="{Binding PeriodosEscolares.Nombre, FallbackValue = 'SEMESTRE'}"  VerticalAlignment="Center" 
+					   TextAlignment="Center" FontWeight="Bold" FontSize="18"/>
+            <TextBlock x:Name="TextBlock_FechaTutoria" Grid.Column="5" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       Text="FECHA TUTORÍA"  VerticalAlignment="Center" TextAlignment="Center" 
+                       FontWeight="Bold" FontSize="18"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock_ProgramaEducativo" Grid.Column="1" HorizontalAlignment="Center"  TextWrapping="Wrap" 
+                       Text="PROGRAMA EDUCATIVO" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="18"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="DataGrid_Problematicas" Grid.Column="1" ColumnWidth="*"  HeadersVisibility="Column" 
+                      DataContext="{StaticResource ViewSource_Problematicas}"
+                      IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_Tutor"
+                        Header="TUTOR"
+                        IsReadOnly="True"
+                        Binding="{Binding TutoriasAcademicas.Academicos.ApellidosNombre}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_ExperienciaEducativa"
+                        Header="EXPERIENCIA EDUCATIVA"
+                        IsReadOnly="True"
+                        Binding="{Binding ExperienciasEducativas_Academicos.ExperienciasEducativas.Nombre}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_Profesor"
+                        Header="PROFESOR"
+                        IsReadOnly="True"
+                        Binding="{Binding ExperienciasEducativas_Academicos.Academicos.ApellidosNombre}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_TituloProblematica"
+                        Header="TÍTULO"
+                        IsReadOnly="True"
+                        Binding="{Binding Titulo}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_DescripcionProblematica"
+                        Header="DESCRIPCIÓN"
+                        IsReadOnly="True"
+                        Binding="{Binding Descripcion}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="Label_Asistentes" Grid.Column="1"
+                   Background="Gray" VerticalAlignment="Center" FontSize="14" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" Text=" Total Asistentes:" HorizontalAlignment="Right"/>
+            </Label>
+
+            <xctk:WatermarkTextBox x:Name="TextBox_TotalAsistentes" Padding="2" Grid.Column="2" HorizontalContentAlignment="Center"
+                                   VerticalAlignment="Center" FontSize="14" CharacterCasing="Normal" VerticalContentAlignment="Center"
+                                   Height="30" Text = "0 (00.00%)" IsReadOnly="True"/>
+
+            <Label x:Name="Label_EnRiesgo" Grid.Column="4"
+                   Background="Gray" VerticalAlignment="Center" FontSize="14" 
+                   FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch">
+                <TextBlock TextWrapping="Wrap" Text="Total En Riesgo:" HorizontalAlignment="Right"/>
+            </Label>
+
+            <xctk:WatermarkTextBox x:Name="TextBox_TotalEnRiesgo" Padding="2" Grid.Column="5" HorizontalContentAlignment="Center"
+                                   VerticalAlignment="Center" FontSize="14" CharacterCasing="Normal" VerticalContentAlignment="Center"
+                                   Height="30" Text = "0 (00.00%)" IsReadOnly="True"/>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="DataGrid_ComentariosGenerales" Grid.Column="1" ColumnWidth="*"  HeadersVisibility="Column" 
+                      DataContext="{StaticResource ViewSource_Tutorias}"
+                      IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_NombreTutor"
+                        Header="TUTOR"
+                        IsReadOnly="True"
+                        Binding="{Binding Academicos.ApellidosNombre}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn
+                        x:Name="DataGridTextColumn_ComentarioTutoria"
+                        Header="COMENTARIO"
+                        IsReadOnly="True"
+                        Binding="{Binding ComentarioGeneral}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.01*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.015*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            
+            <Button x:Name="Button_Cerrar" Grid.Column="5" Content="Cerrar" Grid.Row="1" VerticalAlignment="Center" 
+                    FontSize="16" FontWeight="Bold" Height="34" Click="CerrarVentanaReporteGeneral"/>
+        </Grid>
+    </Grid>
+</Page>

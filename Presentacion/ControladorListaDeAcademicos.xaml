@@ -1,0 +1,22 @@
+﻿<Page x:Class="Presentacion.ControladorListaDeAcademicos"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentacion"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="White"
+      Title="ControladorListaDeAcademicos">
+    <Grid>
+        <DataGrid Name="DataGrid_ListaDeAcademicos"  Margin="542,272,542,272" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="academicoSeleccionado" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding NombreCompleto}" Width="442.5" IsReadOnly="True" FontSize="18"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="141,659,0,0" VerticalAlignment="Top" Click="Button_Click" Height="55" Width="134" FontSize="20"/>
+        <Label x:Name="Label_ListaDeAcademicos" Content="Lista De Académicos" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="24"/>
+        <Label x:Name="Label_Instruccion" Content="Selecciona un académico para continuar" HorizontalAlignment="Center" Margin="0,87,0,0" VerticalAlignment="Top" FontSize="22"/>
+
+    </Grid>
+</Page>
